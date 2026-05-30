@@ -41,6 +41,13 @@
         ></a>
         <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
       </div>
+
+      <!-- Search Form start -->
+      <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here..." />
+        <label for="search-box"><i data-feather="search"></i></label>
+      </div>
+      <!-- Search Form end -->
     </nav>
     <!-- Navbar end -->
 
@@ -70,7 +77,7 @@
           <p>
             Kami menyediakan Aglaonema dengan daun yang cantik dan warna yang
             menawan untuk mempercantik rumahmu. Setiap tanaman dirawat dengan
-            baik agar tetap sehat dan tampil segar saat sampai di tanganmu.
+            baik agar tetap sehat dan tampil segar saat sampai di tanganmu
           </p>
           <p>
             Aglaonema bukan hanya tanaman hias, tapi juga bisa menghadirkan
@@ -246,21 +253,11 @@
     <!-- Footer end -->
 
     <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
     <script>
       feather.replace();
-      const navbarNav = document.querySelector(".navbar-nav");
-      const hm = document.querySelector("#hamburger-menu");
-
-      hm.addEventListener("click", (e) => {
-        e.stopPropagation();
-        navbarNav.classList.toggle("active");
-      });
-
-      document.addEventListener("click", function (e) {
-        if (!navbarNav.contains(e.target)) {
-          navbarNav.classList.remove("active");
-        }
-      });
     </script>
+
+    <script src="script.js"></script>
   </body>
 </html>
