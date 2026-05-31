@@ -493,7 +493,7 @@ body {
 /* Products Section */
 .products .row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 1.5rem;
   margin-top: 4rem;
 }
@@ -532,7 +532,9 @@ body {
 }
 
 .products .product-image img {
-  height: 25rem;
+  height: 18rem;
+  width: 100%;
+  object-fit: cover;
 }
 
 .products .product-content h3 {
@@ -886,6 +888,10 @@ footer .credit a {
     font-size: 1.2rem;
   }
 
+  .products .row {
+    grid-template-columns: repeat(2, 1fr); /* tablet: 2 kolom */
+  }
+
   .contact .row {
     flex-wrap: wrap;
   }
@@ -916,5 +922,9 @@ footer .credit a {
 
   .hero .content {
     top: 90px;
+  }
+
+  .products .row {
+    grid-template-columns: 1fr;
   }
 }
