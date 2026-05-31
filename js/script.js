@@ -32,6 +32,7 @@ cartBtn.addEventListener("click", function (e) {
   e.preventDefault();
   e.stopPropagation();
   shoppingCart.classList.toggle("active");
+  searchForm.classList.remove("active");
 });
 
 // klik di luar elemen
