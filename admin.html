@@ -3,29 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin - Aglaonema Nursery</title>
+    <title>Admin — Aglaonema Nursery</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script src="https://unpkg.com/feather-icons"></script>
-
     <style>
       :root {
         --primary: #b6895b;
-        --primary-dark: #8f6b3f;
-        --bg: #010101;
-        --bg2: #111;
-        --bg3: #1a1a1a;
+        --primary-dark: #8c6540;
+        --primary-light: #d4a97a;
+        --bg-dark: #0f0f0f;
+        --bg-card: #1a1a1a;
+        --bg-panel: #141414;
         --border: #2a2a2a;
-        --text: #fff;
-        --text-muted: #999;
-        --danger: #e74c3c;
-        --success: #2ecc71;
+        --text: #f0f0f0;
+        --text-muted: #888;
+        --danger: #e25555;
+        --success: #4caf7a;
+        --sidebar-w: 240px;
       }
-
       * {
         margin: 0;
         padding: 0;
@@ -34,1034 +32,1756 @@
         border: none;
         text-decoration: none;
       }
-
+      html {
+        font-size: 62.5%;
+        scroll-behavior: smooth;
+      }
       body {
         font-family: "Poppins", sans-serif;
-        background-color: var(--bg);
+        background: var(--bg-dark);
         color: var(--text);
+        font-size: 1.4rem;
         min-height: 100vh;
       }
 
-      /* ===== LOGIN PAGE ===== */
-      .login-page {
-        min-height: 100vh;
+      /* LOGIN */
+      #login-page {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: radial-gradient(ellipse at top, #1a0f07 0%, #010101 70%);
+        min-height: 100vh;
+        background: var(--bg-dark);
+        background-image: radial-gradient(
+          ellipse at 20% 50%,
+          rgba(182, 137, 91, 0.08) 0%,
+          transparent 60%
+        );
       }
-
       .login-box {
-        background: var(--bg2);
+        width: 100%;
+        max-width: 40rem;
+        background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: 16px;
-        padding: 3rem 2.5rem;
-        width: 100%;
-        max-width: 400px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        padding: 4rem 3.5rem;
       }
-
       .login-logo {
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
       }
-
       .login-logo h1 {
-        font-size: 2rem;
+        font-size: 2.4rem;
         font-weight: 700;
+        color: #fff;
         font-style: italic;
       }
-
       .login-logo h1 span {
         color: var(--primary);
       }
-
       .login-logo p {
+        font-size: 1.2rem;
         color: var(--text-muted);
-        font-size: 0.9rem;
-        margin-top: 0.3rem;
+        margin-top: 0.4rem;
       }
-
-      .login-box h2 {
-        font-size: 1.4rem;
-        margin-bottom: 1.5rem;
-        text-align: center;
+      .login-field {
+        margin-bottom: 2rem;
       }
-
-      .form-group {
-        margin-bottom: 1.2rem;
-      }
-
-      .form-group label {
+      .login-field label {
         display: block;
-        font-size: 0.85rem;
+        font-size: 1.2rem;
         color: var(--text-muted);
-        margin-bottom: 0.4rem;
+        margin-bottom: 0.6rem;
+        font-weight: 500;
       }
-
-      .form-group input {
+      .login-field input {
         width: 100%;
-        padding: 0.8rem 1rem;
-        background: var(--bg3);
+        padding: 1.2rem 1.6rem;
+        background: #242424;
         border: 1px solid var(--border);
         border-radius: 8px;
         color: var(--text);
-        font-size: 1rem;
         font-family: "Poppins", sans-serif;
-        transition: border 0.2s;
+        font-size: 1.4rem;
+        transition: border-color 0.2s;
       }
-
-      .form-group input:focus {
+      .login-field input:focus {
         border-color: var(--primary);
       }
-
+      .login-error {
+        display: none;
+        color: var(--danger);
+        font-size: 1.2rem;
+        background: rgba(226, 85, 85, 0.1);
+        padding: 0.8rem 1.2rem;
+        border-radius: 6px;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(226, 85, 85, 0.2);
+      }
+      .login-error.show {
+        display: block;
+      }
       .login-btn {
         width: 100%;
-        padding: 0.9rem;
+        padding: 1.3rem;
         background: var(--primary);
         color: #fff;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
         font-family: "Poppins", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        border-radius: 8px;
         cursor: pointer;
-        transition: background 0.2s;
-        margin-top: 0.5rem;
+        transition:
+          background 0.2s,
+          transform 0.1s;
       }
-
       .login-btn:hover {
         background: var(--primary-dark);
       }
+      .login-btn:active {
+        transform: scale(0.98);
+      }
 
-      .login-error {
-        color: var(--danger);
-        font-size: 0.85rem;
-        text-align: center;
-        margin-top: 0.8rem;
+      /* ADMIN LAYOUT */
+      #admin-page {
         display: none;
       }
-
-      .back-link {
-        display: block;
-        text-align: center;
-        margin-top: 1.2rem;
-        color: var(--text-muted);
-        font-size: 0.85rem;
-        transition: color 0.2s;
+      #admin-page.visible {
+        display: flex;
       }
-
-      .back-link:hover {
-        color: var(--primary);
-      }
-
-      /* ===== DASHBOARD ===== */
-      .dashboard {
-        display: none;
-        min-height: 100vh;
-      }
-
-      /* Sidebar */
       .sidebar {
+        width: var(--sidebar-w);
+        min-height: 100vh;
+        background: var(--bg-panel);
+        border-right: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
         position: fixed;
         top: 0;
         left: 0;
-        width: 240px;
-        height: 100vh;
-        background: var(--bg2);
-        border-right: 1px solid var(--border);
-        padding: 1.5rem;
-        display: flex;
-        flex-direction: column;
         z-index: 100;
+        transition: transform 0.3s;
       }
-
       .sidebar-logo {
-        font-size: 1.2rem;
-        font-weight: 700;
-        font-style: italic;
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
+        padding: 2.5rem 2rem;
         border-bottom: 1px solid var(--border);
       }
-
-      .sidebar-logo span {
+      .sidebar-logo h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        font-style: italic;
+        color: #fff;
+      }
+      .sidebar-logo h2 span {
         color: var(--primary);
       }
-
-      .sidebar-menu {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
+      .sidebar-logo p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        margin-top: 0.2rem;
       }
-
-      .sidebar-menu a {
+      .sidebar-nav {
+        flex: 1;
+        padding: 1.5rem 0;
+      }
+      .nav-section {
+        padding: 0.5rem 2rem 0.3rem;
+        font-size: 1rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+      .nav-item {
         display: flex;
         align-items: center;
-        gap: 0.8rem;
-        padding: 0.7rem 1rem;
-        border-radius: 8px;
+        gap: 1rem;
+        padding: 1.1rem 2rem;
         color: var(--text-muted);
-        font-size: 0.9rem;
-        transition: all 0.2s;
+        font-size: 1.3rem;
         cursor: pointer;
+        transition:
+          background 0.2s,
+          color 0.2s;
+        border-left: 3px solid transparent;
       }
-
-      .sidebar-menu a:hover,
-      .sidebar-menu a.active {
-        background: var(--bg3);
-        color: var(--primary);
-      }
-
-      .sidebar-menu a svg {
+      .nav-item svg {
         width: 18px;
         height: 18px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
       }
-
-      .sidebar-bottom {
-        padding-top: 1rem;
+      .nav-item:hover {
+        background: rgba(182, 137, 91, 0.08);
+        color: var(--primary);
+      }
+      .nav-item.active {
+        background: rgba(182, 137, 91, 0.12);
+        color: var(--primary);
+        border-left-color: var(--primary);
+      }
+      .sidebar-footer {
+        padding: 1.5rem 2rem;
         border-top: 1px solid var(--border);
       }
-
       .logout-btn {
         display: flex;
         align-items: center;
-        gap: 0.8rem;
-        padding: 0.7rem 1rem;
-        border-radius: 8px;
+        gap: 1rem;
+        padding: 1rem 1.2rem;
+        background: transparent;
         color: var(--danger);
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: background 0.2s;
-        width: 100%;
-        background: none;
         font-family: "Poppins", sans-serif;
+        font-size: 1.3rem;
+        border: 1px solid rgba(226, 85, 85, 0.3);
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        transition: background 0.2s;
       }
-
       .logout-btn:hover {
-        background: rgba(231, 76, 60, 0.1);
+        background: rgba(226, 85, 85, 0.1);
       }
-
       .logout-btn svg {
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
 
-      /* Main Content */
-      .main-content {
-        margin-left: 240px;
-        padding: 2rem;
+      /* TOPBAR */
+      .topbar {
+        position: fixed;
+        top: 0;
+        left: var(--sidebar-w);
+        right: 0;
+        height: 60px;
+        background: var(--bg-panel);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2.5rem;
+        z-index: 99;
+      }
+      .topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      #hamburger {
+        display: none;
+        cursor: pointer;
+        background: none;
+        padding: 0.5rem;
+        color: var(--text-muted);
+      }
+      #hamburger svg {
+        width: 22px;
+        height: 22px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .page-title {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .admin-badge {
+        background: rgba(182, 137, 91, 0.15);
+        border: 1px solid rgba(182, 137, 91, 0.3);
+        color: var(--primary);
+        font-size: 1.2rem;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-weight: 500;
+      }
+      #overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+      }
+
+      /* MAIN */
+      .main {
+        margin-left: var(--sidebar-w);
+        padding-top: 60px;
         min-height: 100vh;
       }
-
-      .page-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2rem;
+      .page {
+        display: none;
+        padding: 2.5rem;
+      }
+      .page.active {
+        display: block;
       }
 
-      .page-header h2 {
-        font-size: 1.6rem;
-      }
-
-      /* Stats Cards */
+      /* STATS */
       .stats-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-        margin-bottom: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
       }
-
       .stat-card {
-        background: var(--bg2);
+        background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: 12px;
-        padding: 1.5rem;
+        padding: 2rem;
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 1.5rem;
       }
-
       .stat-icon {
-        width: 48px;
-        height: 48px;
+        width: 50px;
+        height: 50px;
         border-radius: 10px;
-        background: rgba(182, 137, 91, 0.15);
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;
+      }
+      .stat-icon svg {
+        width: 24px;
+        height: 24px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .stat-icon.orange {
+        background: rgba(182, 137, 91, 0.15);
         color: var(--primary);
       }
-
-      .stat-icon svg {
-        width: 22px;
-        height: 22px;
+      .stat-icon.green {
+        background: rgba(76, 175, 122, 0.15);
+        color: var(--success);
       }
-
-      .stat-info h3 {
-        font-size: 1.6rem;
-        font-weight: 700;
+      .stat-icon.blue {
+        background: rgba(91, 135, 182, 0.15);
+        color: #5b87b6;
       }
-
+      .stat-icon.red {
+        background: rgba(226, 85, 85, 0.15);
+        color: var(--danger);
+      }
       .stat-info p {
-        font-size: 0.8rem;
+        font-size: 1.2rem;
         color: var(--text-muted);
+        margin-bottom: 0.3rem;
+      }
+      .stat-info h3 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--text);
       }
 
-      /* Panel */
-      .panel {
-        background: var(--bg2);
+      /* SECTION */
+      .section-card {
+        background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: 12px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
+        padding: 2.5rem;
+        margin-bottom: 2rem;
       }
-
-      .panel-header {
+      .section-header {
         display: flex;
+        align-items: center;
         justify-content: space-between;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .section-header h2 {
+        font-size: 1.7rem;
+        font-weight: 600;
+      }
+
+      /* BUTTONS */
+      .btn {
+        display: inline-flex;
         align-items: center;
-        margin-bottom: 1.5rem;
+        gap: 0.6rem;
+        padding: 0.9rem 1.8rem;
+        border-radius: 8px;
+        font-family: "Poppins", sans-serif;
+        font-size: 1.3rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
       }
-
-      .panel-header h3 {
-        font-size: 1.1rem;
+      .btn svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
-
       .btn-primary {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.6rem 1.2rem;
         background: var(--primary);
         color: #fff;
-        border-radius: 8px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        font-family: "Poppins", sans-serif;
-        cursor: pointer;
-        transition: background 0.2s;
       }
-
       .btn-primary:hover {
         background: var(--primary-dark);
       }
-
-      .btn-primary svg {
-        width: 16px;
-        height: 16px;
+      .btn-danger {
+        background: transparent;
+        color: var(--danger);
+        border: 1px solid rgba(226, 85, 85, 0.3);
+      }
+      .btn-danger:hover {
+        background: rgba(226, 85, 85, 0.1);
+      }
+      .btn-secondary {
+        background: transparent;
+        color: var(--text-muted);
+        border: 1px solid var(--border);
+      }
+      .btn-secondary:hover {
+        color: var(--text);
+        border-color: var(--text-muted);
+      }
+      .btn-sm {
+        padding: 0.5rem 1rem;
+        font-size: 1.2rem;
       }
 
-      /* Product Table */
-      .product-table {
+      /* TABLE */
+      .table-wrap {
+        overflow-x: auto;
+      }
+      table {
         width: 100%;
         border-collapse: collapse;
+        white-space: nowrap;
       }
-
-      .product-table th {
+      th {
         text-align: left;
-        padding: 0.7rem 1rem;
-        font-size: 0.8rem;
+        padding: 1rem 1.5rem;
+        font-size: 1.2rem;
         color: var(--text-muted);
+        font-weight: 500;
         border-bottom: 1px solid var(--border);
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
-
-      .product-table td {
-        padding: 0.8rem 1rem;
-        font-size: 0.9rem;
-        border-bottom: 1px solid var(--border);
-        vertical-align: middle;
+      td {
+        padding: 1.2rem 1.5rem;
+        font-size: 1.3rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
       }
-
-      .product-table tr:last-child td {
+      tr:last-child td {
         border-bottom: none;
       }
-
-      .product-table tr:hover td {
-        background: var(--bg3);
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
       }
-
-      .product-table img {
-        width: 45px;
-        height: 45px;
+      .thumb-wrap {
+        position: relative;
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
+      }
+      .product-thumb {
+        width: 42px;
+        height: 42px;
         border-radius: 8px;
         object-fit: cover;
+        display: block;
       }
-
-      .product-name {
+      .thumb-fallback {
+        width: 42px;
+        height: 42px;
+        border-radius: 8px;
+        background: #2a2a2a;
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        font-weight: 600;
         display: flex;
         align-items: center;
-        gap: 0.8rem;
+        justify-content: center;
       }
 
-      .action-btns {
+      /* FORM */
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+        gap: 1.5rem;
+      }
+      .form-group {
         display: flex;
-        gap: 0.5rem;
+        flex-direction: column;
+        gap: 0.6rem;
       }
-
-      .btn-edit {
-        padding: 0.4rem 0.8rem;
-        background: rgba(182, 137, 91, 0.15);
-        color: var(--primary);
-        border-radius: 6px;
-        font-size: 0.8rem;
-        cursor: pointer;
+      .form-group label {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        padding: 1.1rem 1.4rem;
+        background: #242424;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
         font-family: "Poppins", sans-serif;
-        transition: background 0.2s;
+        font-size: 1.4rem;
+        transition: border-color 0.2s;
+      }
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--primary);
+      }
+      .form-group select option {
+        background: #242424;
+      }
+      .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
       }
 
-      .btn-edit:hover {
-        background: rgba(182, 137, 91, 0.3);
-      }
-
-      .btn-delete {
-        padding: 0.4rem 0.8rem;
-        background: rgba(231, 76, 60, 0.15);
-        color: var(--danger);
-        border-radius: 6px;
-        font-size: 0.8rem;
-        cursor: pointer;
-        font-family: "Poppins", sans-serif;
-        transition: background 0.2s;
-      }
-
-      .btn-delete:hover {
-        background: rgba(231, 76, 60, 0.3);
-      }
-
-      /* Modal Tambah/Edit Produk */
+      /* MODAL */
       .modal-overlay {
         display: none;
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.7);
-        z-index: 9999;
+        z-index: 1000;
         align-items: center;
         justify-content: center;
-      }
-
-      .modal-overlay.active {
-        display: flex;
-      }
-
-      .modal-box {
-        background: var(--bg2);
-        border: 1px solid var(--border);
-        border-radius: 16px;
         padding: 2rem;
-        width: 90%;
-        max-width: 480px;
-        animation: slideDown 0.3s ease;
       }
-
-      @keyframes slideDown {
-        from {
-          transform: translateY(-30px);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-
-      .modal-box h3 {
-        font-size: 1.2rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .modal-form .form-group {
-        margin-bottom: 1rem;
-      }
-
-      .modal-form select {
-        width: 100%;
-        padding: 0.8rem 1rem;
-        background: var(--bg3);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        color: var(--text);
-        font-size: 0.9rem;
-        font-family: "Poppins", sans-serif;
-      }
-
-      .modal-form select option {
-        background: var(--bg3);
-      }
-
-      .modal-actions {
+      .modal-overlay.show {
         display: flex;
-        gap: 0.8rem;
-        justify-content: flex-end;
-        margin-top: 1.5rem;
       }
-
-      .btn-cancel {
-        padding: 0.6rem 1.2rem;
-        background: var(--bg3);
-        color: var(--text-muted);
-        border-radius: 8px;
-        font-size: 0.85rem;
-        cursor: pointer;
-        font-family: "Poppins", sans-serif;
-        transition: background 0.2s;
+      .modal-box {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        width: 100%;
+        max-width: 50rem;
+        max-height: 90vh;
+        overflow-y: auto;
       }
-
-      .btn-cancel:hover {
-        background: var(--border);
+      .modal-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2rem 2.5rem;
+        border-bottom: 1px solid var(--border);
       }
-
-      /* Orders Table */
-      .badge {
-        padding: 0.3rem 0.7rem;
-        border-radius: 20px;
-        font-size: 0.75rem;
+      .modal-head h3 {
+        font-size: 1.7rem;
         font-weight: 600;
       }
-
-      .badge-pending {
-        background: rgba(243, 156, 18, 0.15);
-        color: #f39c12;
+      .modal-close {
+        background: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 0.4rem;
+        border-radius: 6px;
+        display: flex;
+        transition: color 0.2s;
+      }
+      .modal-close:hover {
+        color: var(--text);
+      }
+      .modal-close svg {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .modal-body {
+        padding: 2.5rem;
       }
 
-      .badge-done {
-        background: rgba(46, 204, 113, 0.15);
-        color: var(--success);
-      }
-
-      /* Tabs */
-      .tab-content {
-        display: none;
-      }
-
-      .tab-content.active {
-        display: block;
-      }
-
-      /* Toast */
+      /* TOAST */
       .toast {
         position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        background: var(--success);
-        color: #fff;
-        padding: 0.8rem 1.5rem;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        z-index: 99999;
-        transform: translateY(100px);
+        bottom: 2.5rem;
+        right: 2.5rem;
+        background: #2a2a2a;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.2rem 2rem;
+        font-size: 1.3rem;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        transform: translateY(8rem);
         opacity: 0;
         transition: all 0.3s;
+        pointer-events: none;
+        max-width: 32rem;
       }
-
       .toast.show {
         transform: translateY(0);
         opacity: 1;
       }
-
+      .toast.success {
+        border-left: 3px solid var(--success);
+        color: #fff;
+      }
       .toast.error {
-        background: var(--danger);
+        border-left: 3px solid var(--danger);
+        color: #fff;
+      }
+      .toast svg {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+      }
+
+      /* MISC */
+      .cred-box {
+        max-width: 55rem;
+      }
+      .info-box {
+        background: rgba(182, 137, 91, 0.08);
+        border: 1px solid rgba(182, 137, 91, 0.2);
+        border-radius: 8px;
+        padding: 1.2rem 1.6rem;
+        margin-bottom: 2rem;
+        font-size: 1.3rem;
+        color: var(--primary);
+        display: flex;
+        gap: 0.8rem;
+        align-items: flex-start;
+      }
+      .info-box svg {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+      .current-val {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        margin-top: 0.4rem;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.3rem 0.9rem;
+        border-radius: 20px;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+      .badge-success {
+        background: rgba(76, 175, 122, 0.15);
+        color: var(--success);
+      }
+
+      /* ORDERS */
+      .order-items-cell {
+        max-width: 22rem;
+        white-space: normal;
+        font-size: 1.2rem;
+        color: var(--text-muted);
+      }
+      .trend-up {
+        color: var(--success);
+        font-weight: 600;
+      }
+      .trend-down {
+        color: var(--danger);
+        font-weight: 600;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        .sidebar {
+          transform: translateX(-100%);
+        }
+        .sidebar.open {
+          transform: translateX(0);
+        }
+        #overlay.show {
+          display: block;
+        }
+        .main {
+          margin-left: 0;
+        }
+        .topbar {
+          left: 0;
+        }
+        #hamburger {
+          display: flex;
+        }
+      }
+      @media (max-width: 600px) {
+        .page {
+          padding: 1.5rem 1.2rem;
+        }
+        .section-card {
+          padding: 1.8rem 1.5rem;
+        }
+        .stats-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        th,
+        td {
+          padding: 0.9rem 1rem;
+        }
+        .topbar {
+          padding: 0 1.5rem;
+        }
+      }
+      @media (max-width: 400px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
-
   <body>
-    <!-- ===== LOGIN PAGE ===== -->
-    <div class="login-page" id="loginPage">
+    <!-- LOGIN PAGE -->
+    <div id="login-page">
       <div class="login-box">
         <div class="login-logo">
           <h1>Aglaonema<span>Nursery</span></h1>
           <p>Admin Panel</p>
         </div>
-
-        <div class="form-group">
+        <div class="login-error" id="login-error">
+          Username atau password salah!
+        </div>
+        <div class="login-field">
           <label>Username</label>
           <input
             type="text"
-            id="loginUsername"
+            id="inp-user"
             placeholder="Masukkan username"
+            autocomplete="username"
           />
         </div>
-
-        <div class="form-group">
+        <div class="login-field">
           <label>Password</label>
           <input
             type="password"
-            id="loginPassword"
+            id="inp-pass"
             placeholder="Masukkan password"
+            autocomplete="current-password"
           />
         </div>
-
         <button class="login-btn" onclick="doLogin()">Masuk</button>
-        <p class="login-error" id="loginError">Username atau password salah!</p>
-
-        <a href="index.html" class="back-link">← Kembali ke Website</a>
       </div>
     </div>
 
-    <!-- ===== DASHBOARD ===== -->
-    <div class="dashboard" id="dashboard">
+    <!-- ADMIN PAGE -->
+    <div id="admin-page">
       <!-- Sidebar -->
-      <div class="sidebar">
-        <div class="sidebar-logo">Aglaonema<span>Nursery</span></div>
-
-        <div class="sidebar-menu">
-          <a class="active" onclick="showTab('produk')">
-            <i data-feather="box"></i> Produk
-          </a>
-          <a onclick="showTab('pesanan')">
-            <i data-feather="shopping-bag"></i> Pesanan
-          </a>
-          <a href="index.html"> <i data-feather="globe"></i> Lihat Website </a>
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+          <h2>Aglaonema<span>Nursery</span></h2>
+          <p>Admin Panel</p>
         </div>
-
-        <div class="sidebar-bottom">
+        <nav class="sidebar-nav">
+          <div class="nav-section">Menu</div>
+          <div
+            class="nav-item active"
+            data-page="dashboard"
+            onclick="goPage(this, 'dashboard')"
+          >
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg>
+            Dashboard
+          </div>
+          <div
+            class="nav-item"
+            data-page="products"
+            onclick="goPage(this, 'products')"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 01-8 0" />
+            </svg>
+            Produk
+          </div>
+          <div
+            class="nav-item"
+            data-page="orders"
+            onclick="goPage(this, 'orders')"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"
+              />
+              <rect x="9" y="3" width="6" height="4" rx="1" ry="1" />
+              <line x1="9" y1="12" x2="15" y2="12" />
+              <line x1="9" y1="16" x2="13" y2="16" />
+            </svg>
+            Pesanan
+          </div>
+          <div class="nav-section">Pengaturan</div>
+          <div
+            class="nav-item"
+            data-page="credentials"
+            onclick="goPage(this, 'credentials')"
+          >
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+            Kredensial Login
+          </div>
+          <div
+            class="nav-item"
+            data-page="website"
+            onclick="goPage(this, 'website')"
+          >
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
+            </svg>
+            Pengaturan Website
+          </div>
+        </nav>
+        <div class="sidebar-footer">
           <button class="logout-btn" onclick="doLogout()">
-            <i data-feather="log-out"></i> Logout
+            <svg viewBox="0 0 24 24">
+              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Keluar
           </button>
         </div>
       </div>
 
-      <!-- Main Content -->
-      <div class="main-content">
-        <!-- Stats -->
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon"><i data-feather="box"></i></div>
-            <div class="stat-info">
-              <h3 id="statProduk">10</h3>
-              <p>Total Produk</p>
-            </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon"><i data-feather="shopping-bag"></i></div>
-            <div class="stat-info">
-              <h3 id="statPesanan">0</h3>
-              <p>Total Pesanan</p>
-            </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon"><i data-feather="dollar-sign"></i></div>
-            <div class="stat-info">
-              <h3 id="statRevenue">Rp 0</h3>
-              <p>Total Revenue</p>
-            </div>
-          </div>
-        </div>
+      <div id="overlay" onclick="closeSidebar()"></div>
 
-        <!-- Tab: Produk -->
-        <div class="tab-content active" id="tabProduk">
-          <div class="panel">
-            <div class="panel-header">
-              <h3>Daftar Produk</h3>
-              <button class="btn-primary" onclick="openAddModal()">
-                <i data-feather="plus"></i> Tambah Produk
+      <!-- Topbar -->
+      <div class="topbar">
+        <div class="topbar-left">
+          <button id="hamburger" onclick="toggleSidebar()">
+            <svg viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+          <span class="page-title" id="page-title">Dashboard</span>
+        </div>
+        <div class="topbar-right">
+          <span class="admin-badge" id="admin-name-badge">Admin</span>
+        </div>
+      </div>
+
+      <!-- Main -->
+      <div class="main">
+        <!-- DASHBOARD PAGE -->
+        <div class="page active" id="page-dashboard">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon orange">
+                <svg viewBox="0 0 24 24">
+                  <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <path d="M16 10a4 4 0 01-8 0" />
+                </svg>
+              </div>
+              <div class="stat-info">
+                <p>Total Produk</p>
+                <h3 id="stat-total">10</h3>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">
+                <svg viewBox="0 0 24 24">
+                  <line x1="12" y1="1" x2="12" y2="23" />
+                  <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+                </svg>
+              </div>
+              <div class="stat-info">
+                <p>Total Pendapatan</p>
+                <h3 id="stat-revenue">—</h3>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon blue">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"
+                  />
+                  <rect x="9" y="3" width="6" height="4" rx="1" />
+                </svg>
+              </div>
+              <div class="stat-info">
+                <p>Total Pesanan</p>
+                <h3 id="stat-orders">0</h3>
+              </div>
+            </div>
+          </div>
+          <div class="section-card">
+            <div class="section-header">
+              <h2>Daftar Produk</h2>
+              <button
+                class="btn btn-primary"
+                onclick="
+                  goPage(
+                    document.querySelector('[data-page=products]'),
+                    'products',
+                  )
+                "
+              >
+                <svg viewBox="0 0 24 24">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                Kelola Produk
               </button>
             </div>
-
-            <table class="product-table">
-              <thead>
-                <tr>
-                  <th>Produk</th>
-                  <th>Harga</th>
-                  <th>Harga Coret</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
-              <tbody id="productTableBody"></tbody>
-            </table>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Foto</th>
+                    <th>Nama Produk</th>
+                    <th>Harga</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="dash-table-body"></tbody>
+              </table>
+            </div>
           </div>
         </div>
 
-        <!-- Tab: Pesanan -->
-        <div class="tab-content" id="tabPesanan">
-          <div class="panel">
-            <div class="panel-header">
-              <h3>Daftar Pesanan</h3>
+        <!-- PRODUCTS PAGE -->
+        <div class="page" id="page-products">
+          <div class="section-card">
+            <div class="section-header">
+              <h2>Kelola Produk</h2>
+              <button class="btn btn-primary" onclick="openAddModal()">
+                <svg viewBox="0 0 24 24">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                Tambah Produk
+              </button>
             </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Foto</th>
+                    <th>Nama Produk</th>
+                    <th>Harga</th>
+                    <th style="text-align: center">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="products-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
-            <table class="product-table">
-              <thead>
-                <tr>
-                  <th>Nama</th>
-                  <th>Email</th>
-                  <th>No HP</th>
-                  <th>Produk</th>
-                  <th>Total</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="orderTableBody"></tbody>
-            </table>
+        <!-- ORDERS PAGE -->
+        <div class="page" id="page-orders">
+          <div class="stats-grid" id="order-stats"></div>
+          <div class="section-card">
+            <div class="section-header">
+              <h2>Daftar Pesanan</h2>
+              <button class="btn btn-danger btn-sm" onclick="clearOrders()">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="14"
+                  height="14"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="3 6 5 6 21 6" />
+                  <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+                  <path d="M10 11v6" />
+                  <path d="M14 11v6" />
+                  <path d="M9 6V4h6v2" />
+                </svg>
+                Hapus Semua Pesanan
+              </button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Tanggal</th>
+                    <th>Pelanggan</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    <th>Trend</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
-            <p
-              id="noOrders"
-              style="
-                text-align: center;
-                color: var(--text-muted);
-                padding: 2rem;
-                display: none;
-              "
-            >
-              Belum ada pesanan masuk.
-            </p>
+        <!-- CREDENTIALS PAGE -->
+        <div class="page" id="page-credentials">
+          <div class="section-card cred-box">
+            <div class="section-header"><h2>Ubah Kredensial Login</h2></div>
+            <div class="info-box">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              Perubahan akan berlaku saat login berikutnya. Pastikan kamu ingat
+              username dan password baru.
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Username Baru</label
+                ><input
+                  type="text"
+                  id="cred-user"
+                  placeholder="Username baru"
+                />
+              </div>
+              <div class="form-group">
+                <label>Password Lama</label
+                ><input
+                  type="password"
+                  id="cred-old-pass"
+                  placeholder="Konfirmasi password lama"
+                />
+              </div>
+              <div class="form-group">
+                <label>Password Baru</label
+                ><input
+                  type="password"
+                  id="cred-new-pass"
+                  placeholder="Password baru"
+                />
+              </div>
+              <div class="form-group">
+                <label>Konfirmasi Password Baru</label
+                ><input
+                  type="password"
+                  id="cred-confirm-pass"
+                  placeholder="Ulangi password baru"
+                />
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" onclick="saveCredentials()">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"
+                  />
+                  <polyline points="17 21 17 13 7 13 7 21" />
+                  <polyline points="7 3 7 8 15 8" />
+                </svg>
+                Simpan Perubahan
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- WEBSITE SETTINGS PAGE -->
+        <div class="page" id="page-website">
+          <div class="section-card" style="max-width: 65rem">
+            <div class="section-header"><h2>Pengaturan Website</h2></div>
+            <div class="info-box">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              Perubahan di sini langsung terlihat di halaman website utama saat
+              index.html di-refresh.
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Nama Website</label>
+                <input
+                  type="text"
+                  id="ws-name"
+                  placeholder="Aglaonema Nursery"
+                />
+                <span class="current-val"
+                  >Nilai saat ini: <b id="ws-name-cur">—</b></span
+                >
+              </div>
+              <div class="form-group">
+                <label>Tagline / Subtitle Hero</label>
+                <input
+                  type="text"
+                  id="ws-tagline"
+                  placeholder="Keindahan daun aglaonema..."
+                />
+                <span class="current-val"
+                  >Nilai saat ini: <b id="ws-tagline-cur">—</b></span
+                >
+              </div>
+              <div class="form-group">
+                <label>Warna Utama (Primary Color)</label>
+                <div style="display: flex; align-items: center; gap: 1rem">
+                  <input
+                    type="color"
+                    id="ws-color"
+                    value="#b6895b"
+                    style="
+                      width: 50px;
+                      height: 38px;
+                      padding: 2px;
+                      cursor: pointer;
+                      border-radius: 6px;
+                    "
+                  />
+                  <input
+                    type="text"
+                    id="ws-color-text"
+                    placeholder="#b6895b"
+                    style="flex: 1"
+                  />
+                </div>
+                <span class="current-val"
+                  >Nilai saat ini: <b id="ws-color-cur">—</b></span
+                >
+              </div>
+              <div class="form-group">
+                <label>Deskripsi Tentang Kami</label>
+                <textarea
+                  id="ws-about"
+                  rows="4"
+                  placeholder="Deskripsi singkat..."
+                  style="resize: vertical"
+                ></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" onclick="saveWebsiteSettings()">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"
+                  />
+                  <polyline points="17 21 17 13 7 13 7 21" />
+                  <polyline points="7 3 7 8 15 8" />
+                </svg>
+                Simpan & Terapkan
+              </button>
+              <button
+                class="btn btn-secondary"
+                onclick="resetWebsiteSettings()"
+              >
+                Reset Default
+              </button>
+            </div>
           </div>
         </div>
       </div>
+      <!-- /main -->
     </div>
+    <!-- /admin-page -->
 
-    <!-- Modal Tambah/Edit Produk -->
-    <div class="modal-overlay" id="productModal">
+    <!-- MODAL: Add/Edit Product -->
+    <div class="modal-overlay" id="product-modal">
       <div class="modal-box">
-        <h3 id="modalTitle">Tambah Produk</h3>
-        <div class="modal-form">
-          <div class="form-group">
-            <label>Nama Produk</label>
-            <input
-              type="text"
-              id="modalName"
-              placeholder="Contoh: Aglaonema Lotus"
-            />
-          </div>
-          <div class="form-group">
-            <label>Harga (Rp)</label>
-            <input type="number" id="modalPrice" placeholder="Contoh: 150000" />
-          </div>
-          <div class="form-group">
-            <label>Harga Coret (opsional)</label>
-            <input
-              type="number"
-              id="modalOldPrice"
-              placeholder="Contoh: 170000"
-            />
-          </div>
-          <div class="form-group">
-            <label>Nama File Gambar</label>
-            <input
-              type="text"
-              id="modalImg"
-              placeholder="Contoh: Aglaonema lotus.jpg"
-            />
-          </div>
-        </div>
-        <div class="modal-actions">
-          <button class="btn-cancel" onclick="closeModal()">Batal</button>
-          <button class="btn-primary" onclick="saveProduct()">
-            <i data-feather="save"></i> Simpan
+        <div class="modal-head">
+          <h3 id="modal-title">Tambah Produk</h3>
+          <button class="modal-close" onclick="closeModal()">
+            <svg viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
           </button>
         </div>
+        <div class="modal-body">
+          <input type="hidden" id="modal-edit-index" value="-1" />
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nama Produk</label
+              ><input type="text" id="modal-name" placeholder="Aglaonema ..." />
+            </div>
+            <div class="form-group">
+              <label>Harga (Rp)</label
+              ><input type="number" id="modal-price" placeholder="80000" />
+            </div>
+            <div class="form-group" style="grid-column: 1/-1">
+              <label>Path Gambar (relatif dari root)</label>
+              <input
+                type="text"
+                id="modal-img"
+                placeholder="img/Aglaonema-adelina.jpg"
+              />
+              <span class="current-val">Contoh: img/Aglaonema adelina.jpg</span>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="saveProduct()">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"
+                />
+                <polyline points="17 21 17 13 7 13 7 21" />
+                <polyline points="7 3 7 8 15 8" />
+              </svg>
+              Simpan
+            </button>
+            <button class="btn btn-secondary" onclick="closeModal()">
+              Batal
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+      <svg id="toast-icon" viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+      <span id="toast-msg">Tersimpan</span>
+    </div>
 
     <script>
-      // ===== AUTH =====
-      const ADMIN = { username: "admin", password: "admin123" };
-
-      function doLogin() {
-        const u = document.getElementById("loginUsername").value;
-        const p = document.getElementById("loginPassword").value;
-
-        if (u === ADMIN.username && p === ADMIN.password) {
-          localStorage.setItem("adminLoggedIn", "true");
-          showDashboard();
-        } else {
-          document.getElementById("loginError").style.display = "block";
-        }
-      }
-
-      // Login dengan Enter
-      document
-        .getElementById("loginPassword")
-        .addEventListener("keydown", function (e) {
-          if (e.key === "Enter") doLogin();
-        });
-
-      function doLogout() {
-        localStorage.removeItem("adminLoggedIn");
-        document.getElementById("dashboard").style.display = "none";
-        document.getElementById("loginPage").style.display = "flex";
-      }
-
-      function showDashboard() {
-        document.getElementById("loginPage").style.display = "none";
-        document.getElementById("dashboard").style.display = "block";
-        loadProducts();
-        loadOrders();
-        feather.replace();
-      }
-
-      // Cek kalau sudah login
-      if (localStorage.getItem("adminLoggedIn") === "true") {
-        showDashboard();
-      }
-
-      // ===== TABS =====
-      function showTab(tab) {
-        document
-          .querySelectorAll(".tab-content")
-          .forEach((t) => t.classList.remove("active"));
-        document
-          .querySelectorAll(".sidebar-menu a")
-          .forEach((a) => a.classList.remove("active"));
-
-        document
-          .getElementById("tab" + tab.charAt(0).toUpperCase() + tab.slice(1))
-          .classList.add("active");
-        event.target.closest("a").classList.add("active");
-      }
-
-      // ===== PRODUCTS =====
-      const defaultProducts = [
+      const DEFAULT_CREDS = { username: "admin", password: "admin123" };
+      const DEFAULT_PRODUCTS = [
         {
           id: 1,
           name: "Aglaonema Adelina",
+          img: "img/Aglaonema-adelina.jpg",
           price: 80000,
-          oldPrice: null,
-          img: "Aglaonema adelina.jpg",
         },
         {
           id: 2,
           name: "Aglaonema Bidadari",
+          img: "img/Aglaonema-bidadari.jpg",
           price: 100000,
-          oldPrice: 115000,
-          img: "Aglaonema bidadari.jpg",
         },
         {
           id: 3,
           name: "Aglaonema Hot Lady",
+          img: "img/Aglaonema-hot-lady.jpg",
           price: 105000,
-          oldPrice: 120000,
-          img: "Aglaonema hot lady.jpg",
         },
         {
           id: 4,
           name: "Aglaonema Khanza",
+          img: "img/Aglaonema-khanza.jpg",
           price: 120000,
-          oldPrice: 135000,
-          img: "Aglaonema khanza.jpg",
         },
         {
           id: 5,
           name: "Aglaonema Kochin",
+          img: "img/Aglaonema-kochin-red.jpg",
           price: 110000,
-          oldPrice: 125000,
-          img: "Aglaonema kochin red.jpg",
         },
         {
           id: 6,
           name: "Aglaonema Lipstick",
+          img: "img/Aglaonema-lipstick.jpg",
           price: 60000,
-          oldPrice: null,
-          img: "Aglaonema lipstick.jpg",
         },
         {
           id: 7,
           name: "Aglaonema Lotus",
+          img: "img/Aglaonema-lotus.jpg",
           price: 150000,
-          oldPrice: 170000,
-          img: "Aglaonema lotus.jpg",
         },
         {
           id: 8,
           name: "Aglaonema Merah",
+          img: "img/Aglaonema-merah.jpg",
           price: 90000,
-          oldPrice: null,
-          img: "Aglaonema merah.jpg",
         },
         {
           id: 9,
           name: "Aglaonema Moonlight",
+          img: "img/Aglaonema-moonlight.jpg",
           price: 95000,
-          oldPrice: null,
-          img: "Aglaonema moonlight.jpg",
         },
         {
           id: 10,
           name: "Aglaonema Silver Bay",
+          img: "img/Aglaonema-silver-bay.jpg",
           price: 85000,
-          oldPrice: null,
-          img: "Aglaonema silver bay.jpg",
         },
       ];
 
+      function getCreds() {
+        return JSON.parse(localStorage.getItem("adminCreds")) || DEFAULT_CREDS;
+      }
       function getProducts() {
         return (
-          JSON.parse(localStorage.getItem("adminProducts")) || defaultProducts
+          JSON.parse(localStorage.getItem("adminProducts")) || DEFAULT_PRODUCTS
         );
       }
-
-      function saveProducts(products) {
-        localStorage.setItem("adminProducts", JSON.stringify(products));
+      function getOrders() {
+        return JSON.parse(localStorage.getItem("orders") || "[]");
+      }
+      function saveProducts(p) {
+        localStorage.setItem("adminProducts", JSON.stringify(p));
+      }
+      function rp(n) {
+        return "Rp " + Number(n).toLocaleString("id-ID");
       }
 
-      function loadProducts() {
-        const products = getProducts();
-        const tbody = document.getElementById("productTableBody");
-        document.getElementById("statProduk").textContent = products.length;
+      /* LOGIN */
+      document.getElementById("inp-pass").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") doLogin();
+      });
+      function doLogin() {
+        const u = document.getElementById("inp-user").value.trim();
+        const p = document.getElementById("inp-pass").value;
+        const creds = getCreds();
+        if (u === creds.username && p === creds.password) {
+          document.getElementById("login-page").style.display = "none";
+          document.getElementById("admin-page").classList.add("visible");
+          document.getElementById("admin-name-badge").textContent = u;
+          refreshAll();
+        } else {
+          const e = document.getElementById("login-error");
+          e.classList.add("show");
+          setTimeout(() => e.classList.remove("show"), 3000);
+        }
+      }
+      function doLogout() {
+        document.getElementById("admin-page").classList.remove("visible");
+        document.getElementById("login-page").style.display = "flex";
+        document.getElementById("inp-user").value = "";
+        document.getElementById("inp-pass").value = "";
+      }
 
+      /* SIDEBAR */
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("open");
+        document.getElementById("overlay").classList.toggle("show");
+      }
+      function closeSidebar() {
+        document.getElementById("sidebar").classList.remove("open");
+        document.getElementById("overlay").classList.remove("show");
+      }
+
+      /* PAGES */
+      const titles = {
+        dashboard: "Dashboard",
+        products: "Kelola Produk",
+        orders: "Pesanan",
+        credentials: "Kredensial Login",
+        website: "Pengaturan Website",
+      };
+      function goPage(el, name) {
+        document
+          .querySelectorAll(".nav-item")
+          .forEach((n) => n.classList.remove("active"));
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("active"));
+        el.classList.add("active");
+        document.getElementById("page-" + name).classList.add("active");
+        document.getElementById("page-title").textContent =
+          titles[name] || name;
+        closeSidebar();
+        if (name === "dashboard") renderDashboard();
+        if (name === "products") renderProductsTable();
+        if (name === "orders") renderOrders();
+        if (name === "website") loadWebsiteForm();
+        if (name === "credentials") loadCredForm();
+      }
+
+      /* THUMB */
+      function thumbHTML(p) {
+        var ini =
+          (p.name || "")
+            .replace("Aglaonema ", "")
+            .substring(0, 2)
+            .toUpperCase() || "?";
+        var d = document.createElement("div");
+        d.className = "thumb-wrap";
+        var fb = document.createElement("div");
+        fb.className = "thumb-fallback";
+        fb.style.display = "none";
+        fb.textContent = ini;
+        var img = document.createElement("img");
+        img.className = "product-thumb";
+        img.alt = p.name;
+        img.src = p.img;
+        img.onerror = function () {
+          this.style.display = "none";
+          this.previousElementSibling.style.display = "flex";
+        };
+        img.onload = function () {
+          this.style.display = "";
+          this.previousElementSibling.style.display = "none";
+        };
+        d.appendChild(fb);
+        d.appendChild(img);
+        return d.outerHTML;
+      }
+
+      /* DASHBOARD */
+      function renderDashboard() {
+        const products = getProducts();
+        const orders = getOrders();
+        const revenue = orders.reduce((s, o) => s + o.total, 0);
+        document.getElementById("stat-total").textContent = products.length;
+        document.getElementById("stat-revenue").textContent =
+          revenue > 0 ? rp(revenue) : "Rp 0";
+        document.getElementById("stat-orders").textContent = orders.length;
+        const tbody = document.getElementById("dash-table-body");
+        tbody.innerHTML = products
+          .map(
+            (p) => `
+          <tr>
+            <td>${thumbHTML(p)}</td>
+            <td>${p.name}</td>
+            <td>${rp(p.price)}</td>
+            <td><span class="badge badge-success">Aktif</span></td>
+          </tr>`,
+          )
+          .join("");
+      }
+
+      /* PRODUCTS TABLE */
+      function renderProductsTable() {
+        const products = getProducts();
+        const tbody = document.getElementById("products-table-body");
         tbody.innerHTML = products
           .map(
             (p, i) => `
           <tr>
-            <td>
-              <div class="product-name">
-                <img src="img/${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/45x45/333/b6895b?text=🌿'" />
-                <span>${p.name}</span>
-              </div>
+            <td>${thumbHTML(p)}</td>
+            <td>${p.name}</td>
+            <td>${rp(p.price)}</td>
+            <td style="text-align:center;display:flex;gap:.8rem;justify-content:center">
+              <button class="btn btn-secondary btn-sm" onclick="openEditModal(${i})">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Edit
+              </button>
+              <button class="btn btn-danger btn-sm" onclick="deleteProduct(${i})">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                Hapus
+              </button>
             </td>
-            <td>Rp ${p.price.toLocaleString("id-ID")}</td>
-            <td>${p.oldPrice ? "Rp " + p.oldPrice.toLocaleString("id-ID") : "-"}</td>
-            <td>
-              <div class="action-btns">
-                <button class="btn-edit" onclick="openEditModal(${i})">Edit</button>
-                <button class="btn-delete" onclick="deleteProduct(${i})">Hapus</button>
-              </div>
-            </td>
-          </tr>
-        `,
+          </tr>`,
           )
           .join("");
       }
 
-      function deleteProduct(index) {
+      /* PRODUCT MODAL */
+      function openAddModal() {
+        document.getElementById("modal-title").textContent = "Tambah Produk";
+        document.getElementById("modal-edit-index").value = "-1";
+        document.getElementById("modal-name").value = "";
+        document.getElementById("modal-price").value = "";
+        document.getElementById("modal-img").value = "";
+        document.getElementById("product-modal").classList.add("show");
+      }
+      function openEditModal(i) {
+        const p = getProducts()[i];
+        document.getElementById("modal-title").textContent = "Edit Produk";
+        document.getElementById("modal-edit-index").value = i;
+        document.getElementById("modal-name").value = p.name;
+        document.getElementById("modal-price").value = p.price;
+        document.getElementById("modal-img").value = p.img;
+        document.getElementById("product-modal").classList.add("show");
+      }
+      function closeModal() {
+        document.getElementById("product-modal").classList.remove("show");
+      }
+      function saveProduct() {
+        const name = document.getElementById("modal-name").value.trim();
+        const price =
+          parseInt(document.getElementById("modal-price").value) || 0;
+        const img = document.getElementById("modal-img").value.trim();
+        if (!name || !price || !img) {
+          toast("Lengkapi semua field!", "error");
+          return;
+        }
+        const products = getProducts();
+        const idx = parseInt(document.getElementById("modal-edit-index").value);
+        if (idx === -1) {
+          const maxId = products.reduce((m, p) => Math.max(m, p.id), 0);
+          products.push({ id: maxId + 1, name, img, price });
+          toast("Produk berhasil ditambahkan!");
+        } else {
+          products[idx] = { ...products[idx], name, img, price };
+          toast("Produk berhasil diperbarui!");
+        }
+        saveProducts(products);
+        closeModal();
+        renderProductsTable();
+        renderDashboard();
+      }
+      function deleteProduct(i) {
         if (!confirm("Yakin hapus produk ini?")) return;
         const products = getProducts();
-        products.splice(index, 1);
+        products.splice(i, 1);
         saveProducts(products);
-        loadProducts();
-        showToast("Produk berhasil dihapus!");
+        renderProductsTable();
+        renderDashboard();
+        toast("Produk dihapus.", "error");
       }
 
-      // ===== MODAL =====
-      let editIndex = -1;
-
-      function openAddModal() {
-        editIndex = -1;
-        document.getElementById("modalTitle").textContent = "Tambah Produk";
-        document.getElementById("modalName").value = "";
-        document.getElementById("modalPrice").value = "";
-        document.getElementById("modalOldPrice").value = "";
-        document.getElementById("modalImg").value = "";
-        document.getElementById("productModal").classList.add("active");
-        feather.replace();
+      /* ORDERS */
+      function clearOrders() {
+        if (!confirm("Hapus semua data pesanan?")) return;
+        localStorage.removeItem("orders");
+        renderOrders();
+        toast("Semua pesanan dihapus.", "error");
       }
+      function renderOrders() {
+        const orders = getOrders();
+        const statsEl = document.getElementById("order-stats");
+        const tbody = document.getElementById("orders-table-body");
 
-      function openEditModal(index) {
-        editIndex = index;
-        const products = getProducts();
-        const p = products[index];
-        document.getElementById("modalTitle").textContent = "Edit Produk";
-        document.getElementById("modalName").value = p.name;
-        document.getElementById("modalPrice").value = p.price;
-        document.getElementById("modalOldPrice").value = p.oldPrice || "";
-        document.getElementById("modalImg").value = p.img;
-        document.getElementById("productModal").classList.add("active");
-        feather.replace();
-      }
+        const totalOrders = orders.length;
+        const totalRevenue = orders.reduce((s, o) => s + o.total, 0);
+        const avgOrder = totalOrders
+          ? Math.round(totalRevenue / totalOrders)
+          : 0;
 
-      function closeModal() {
-        document.getElementById("productModal").classList.remove("active");
-      }
-
-      function saveProduct() {
-        const name = document.getElementById("modalName").value.trim();
-        const price = parseInt(document.getElementById("modalPrice").value);
-        const oldPrice =
-          parseInt(document.getElementById("modalOldPrice").value) || null;
-        const img = document.getElementById("modalImg").value.trim();
-
-        if (!name || !price || !img) {
-          showToast("Lengkapi semua field!", true);
-          return;
+        // Trend bulan ini vs bulan lalu
+        const now = new Date();
+        const thisMonth = orders.filter((o) => {
+          const d = new Date(o.id);
+          return (
+            d.getMonth() === now.getMonth() &&
+            d.getFullYear() === now.getFullYear()
+          );
+        });
+        const lastMonth = orders.filter((o) => {
+          const d = new Date(o.id);
+          const lm = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+          return (
+            d.getMonth() === lm.getMonth() &&
+            d.getFullYear() === lm.getFullYear()
+          );
+        });
+        const thisRev = thisMonth.reduce((s, o) => s + o.total, 0);
+        const lastRev = lastMonth.reduce((s, o) => s + o.total, 0);
+        let trendText = "—",
+          trendColor = "orange";
+        if (lastRev > 0) {
+          const pct = Math.round(((thisRev - lastRev) / lastRev) * 100);
+          trendText = (pct >= 0 ? "▲ +" : "▼ ") + pct + "% vs bln lalu";
+          trendColor = pct >= 0 ? "green" : "red";
+        } else if (thisRev > 0) {
+          trendText = "▲ Baru bulan ini";
+          trendColor = "green";
         }
 
-        const products = getProducts();
-
-        if (editIndex === -1) {
-          // Tambah baru
-          products.push({
-            id: Date.now(),
-            name,
-            price,
-            oldPrice,
-            img,
-          });
-          showToast("Produk berhasil ditambahkan!");
-        } else {
-          // Edit
-          products[editIndex] = {
-            ...products[editIndex],
-            name,
-            price,
-            oldPrice,
-            img,
-          };
-          showToast("Produk berhasil diupdate!");
-        }
-
-        saveProducts(products);
-        loadProducts();
-        closeModal();
-      }
-
-      // ===== ORDERS =====
-      function loadOrders() {
-        const orders = JSON.parse(localStorage.getItem("orders")) || [];
-        const tbody = document.getElementById("orderTableBody");
-        const noOrders = document.getElementById("noOrders");
-
-        document.getElementById("statPesanan").textContent = orders.length;
-
-        // Hitung revenue
-        const revenue = orders.reduce((sum, o) => sum + (o.total || 0), 0);
-        document.getElementById("statRevenue").textContent =
-          "Rp " + revenue.toLocaleString("id-ID");
+        statsEl.innerHTML = `
+          <div class="stat-card"><div class="stat-icon orange"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></div><div class="stat-info"><p>Total Pesanan</p><h3>${totalOrders}</h3></div></div>
+          <div class="stat-card"><div class="stat-icon green"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="stat-info"><p>Total Pendapatan</p><h3>${rp(totalRevenue)}</h3></div></div>
+          <div class="stat-card"><div class="stat-icon blue"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="stat-info"><p>Rata-rata Pesanan</p><h3>${rp(avgOrder)}</h3></div></div>
+          <div class="stat-card"><div class="stat-icon ${trendColor}"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><div class="stat-info"><p>Trend Penjualan</p><h3 style="font-size:1.5rem">${trendText}</h3></div></div>
+        `;
 
         if (orders.length === 0) {
-          noOrders.style.display = "block";
-          tbody.innerHTML = "";
+          tbody.innerHTML =
+            '<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:3rem">Belum ada pesanan masuk</td></tr>';
           return;
         }
 
-        noOrders.style.display = "none";
         tbody.innerHTML = orders
-          .map(
-            (o) => `
-          <tr>
-            <td>${o.name}</td>
-            <td>${o.email}</td>
-            <td>${o.phone}</td>
-            <td>${o.items ? o.items.map((i) => i.name + " x" + i.qty).join(", ") : "-"}</td>
-            <td>Rp ${(o.total || 0).toLocaleString("id-ID")}</td>
-            <td><span class="badge badge-pending">Pending</span></td>
-          </tr>
-        `,
-          )
+          .slice()
+          .reverse()
+          .map((o, i) => {
+            const itemList = o.items
+              .map((it) => `${it.name} x${it.qty}`)
+              .join(", ");
+            const origIdx = orders.length - 1 - i;
+            const prev = origIdx > 0 ? orders[origIdx - 1].total : null;
+            let trend = "—";
+            if (prev !== null) {
+              trend =
+                o.total >= prev
+                  ? '<span class="trend-up">▲ Naik</span>'
+                  : '<span class="trend-down">▼ Turun</span>';
+            }
+            return `
+            <tr>
+              <td>#${orders.length - i}</td>
+              <td>${o.date}</td>
+              <td><b>${o.customer.name}</b><br><small style="color:var(--text-muted)">${o.customer.phone}</small></td>
+              <td class="order-items-cell">${itemList}</td>
+              <td><b>${rp(o.total)}</b></td>
+              <td>${trend}</td>
+            </tr>`;
+          })
           .join("");
       }
 
-      // ===== TOAST =====
-      function showToast(msg, isError = false) {
-        const toast = document.getElementById("toast");
-        toast.textContent = msg;
-        toast.className = "toast" + (isError ? " error" : "");
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 3000);
+      /* CREDENTIALS */
+      function loadCredForm() {
+        const c = getCreds();
+        document.getElementById("cred-user").value = c.username;
+        document.getElementById("cred-old-pass").value = "";
+        document.getElementById("cred-new-pass").value = "";
+        document.getElementById("cred-confirm-pass").value = "";
+      }
+      function saveCredentials() {
+        const oldPass = document.getElementById("cred-old-pass").value;
+        const newUser = document.getElementById("cred-user").value.trim();
+        const newPass = document.getElementById("cred-new-pass").value;
+        const confirmPass = document.getElementById("cred-confirm-pass").value;
+        const creds = getCreds();
+        if (oldPass !== creds.password) {
+          toast("Password lama salah!", "error");
+          return;
+        }
+        if (!newUser) {
+          toast("Username tidak boleh kosong!", "error");
+          return;
+        }
+        if (newPass && newPass !== confirmPass) {
+          toast("Konfirmasi password tidak cocok!", "error");
+          return;
+        }
+        localStorage.setItem(
+          "adminCreds",
+          JSON.stringify({
+            username: newUser,
+            password: newPass || creds.password,
+          }),
+        );
+        document.getElementById("admin-name-badge").textContent = newUser;
+        toast("Kredensial berhasil diperbarui!");
+        loadCredForm();
       }
 
-      // Close modal klik luar
+      /* WEBSITE SETTINGS */
+      const WS_KEY = "adminWebSettings";
+      const WS_DEFAULT = {
+        name: "AglaonemaXNursery",
+        tagline:
+          "Keindahan daun aglaonema untuk suasana rumah yang lebih segar",
+        color: "#b6895b",
+        about:
+          "Kami menyediakan Aglaonema dengan daun yang cantik dan warna yang menawan.",
+      };
+      function getWS() {
+        return Object.assign(
+          {},
+          WS_DEFAULT,
+          JSON.parse(localStorage.getItem(WS_KEY) || "{}"),
+        );
+      }
+
+      const products = JSON.parse(localStorage.getItem("adminProducts")) || [];
+
+      function loadWebsiteForm() {
+        const s = getWS();
+        document.getElementById("ws-name").value = s.name;
+        document.getElementById("ws-tagline").value = s.tagline;
+        document.getElementById("ws-color").value = s.color;
+        document.getElementById("ws-color-text").value = s.color;
+        document.getElementById("ws-about").value = s.about;
+        document.getElementById("ws-name-cur").textContent = s.name;
+        document.getElementById("ws-tagline-cur").textContent =
+          s.tagline.substring(0, 40) + "...";
+        document.getElementById("ws-color-cur").textContent = s.color;
+      }
       document
-        .getElementById("productModal")
-        .addEventListener("click", function (e) {
-          if (e.target === this) closeModal();
+        .getElementById("ws-color")
+        .addEventListener("input", function () {
+          document.getElementById("ws-color-text").value = this.value;
         });
+      document
+        .getElementById("ws-color-text")
+        .addEventListener("input", function () {
+          if (/^#[0-9a-fA-F]{6}$/.test(this.value))
+            document.getElementById("ws-color").value = this.value;
+        });
+      function saveWebsiteSettings() {
+        const s = {
+          name:
+            document.getElementById("ws-name").value.trim() || WS_DEFAULT.name,
+          tagline:
+            document.getElementById("ws-tagline").value.trim() ||
+            WS_DEFAULT.tagline,
+          color: document.getElementById("ws-color").value,
+          about:
+            document.getElementById("ws-about").value.trim() ||
+            WS_DEFAULT.about,
+        };
+        localStorage.setItem(WS_KEY, JSON.stringify(s));
+        loadWebsiteForm();
+        toast(
+          "Pengaturan disimpan! Refresh index.html untuk melihat perubahan.",
+        );
+      }
+      function resetWebsiteSettings() {
+        localStorage.removeItem(WS_KEY);
+        loadWebsiteForm();
+        toast("Pengaturan direset ke default.");
+      }
+
+      /* TOAST */
+      let toastTimer;
+      function toast(msg, type = "success") {
+        const el = document.getElementById("toast");
+        const icon = document.getElementById("toast-icon");
+        document.getElementById("toast-msg").textContent = msg;
+        el.className = "toast " + (type === "error" ? "error" : "success");
+        if (type === "error")
+          icon.innerHTML =
+            '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>';
+        else icon.innerHTML = '<polyline points="20 6 9 17 4 12"/>';
+        el.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => el.classList.remove("show"), 3000);
+      }
+
+      /* INIT */
+      function refreshAll() {
+        renderDashboard();
+      }
     </script>
   </body>
 </html>

@@ -4,61 +4,61 @@ document.addEventListener("alpine:init", () => {
       {
         id: 1,
         name: "Aglaonema Adelina",
-        img: "img/Aglaonema adelina.jpg",
+        img: "img/Aglaonema-adelina.jpg",
         price: 80000,
       },
       {
         id: 2,
         name: "Aglaonema Bidadari",
-        img: "img/Aglaonema bidadari.jpg",
+        img: "img/Aglaonema-bidadari.jpg",
         price: 115000,
       },
       {
         id: 3,
         name: "Aglaonema Hot Lady",
-        img: "img/Aglaonema hot lady.jpg",
+        img: "img/Aglaonema-hot-lady.jpg",
         price: 120000,
       },
       {
         id: 4,
         name: "Aglaonema Khanza",
-        img: "img/Aglaonema khanza.jpg",
+        img: "img/Aglaonema-khanza.jpg",
         price: 135000,
       },
       {
         id: 5,
         name: "Aglaonema Kochin",
-        img: "img/Aglaonema kochin red.jpg",
+        img: "img/Aglaonema-kochin-red.jpg",
         price: 125000,
       },
       {
         id: 6,
         name: "Aglaonema Lipstick",
-        img: "img/Aglaonema lipstick.jpg",
+        img: "img/Aglaonema-lipstick.jpg",
         price: 60000,
       },
       {
         id: 7,
         name: "Aglaonema Lotus",
-        img: "img/Aglaonema lotus.jpg",
+        img: "img/Aglaonema-lotus.jpg",
         price: 170000,
       },
       {
         id: 8,
         name: "Aglaonema Merah",
-        img: "img/Aglaonema merah.jpg",
+        img: "img/Aglaonema-merah.jpg",
         price: 90000,
       },
       {
         id: 9,
         name: "Aglaonema Moonlight",
-        img: "img/Aglaonema moonlight.jpg",
+        img: "img/Aglaonema-moonlight.jpg",
         price: 95000,
       },
       {
         id: 10,
         name: "Aglaonema Silver Bay",
-        img: "img/Aglaonema silver bay.jpg",
+        img: "img/Aglaonema-silver-bay.jpg",
         price: 85000,
       },
     ],
@@ -83,7 +83,6 @@ document.addEventListener("alpine:init", () => {
 
     updateCart() {
       this.quantity = this.items.reduce((sum, item) => sum + item.qty, 0);
-
       this.total = this.items.reduce((sum, item) => sum + item.total, 0);
     },
 
@@ -114,7 +113,6 @@ document.addEventListener("alpine:init", () => {
     increment(index) {
       this.items[index].qty++;
       this.items[index].total = this.items[index].qty * this.items[index].price;
-
       this.updateCart();
       this.save();
     },
@@ -127,7 +125,6 @@ document.addEventListener("alpine:init", () => {
       } else {
         this.items.splice(index, 1);
       }
-
       this.updateCart();
       this.save();
     },
