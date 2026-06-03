@@ -102,7 +102,7 @@ window.onclick = (e) => {
   if (e.target === itemDetailModal) itemDetailModal.classList.remove("active");
 };
 
-// Search functionality
+// Fitur Pencarian Produk
 searchBox.addEventListener("input", function () {
   const keyword = this.value.toLowerCase();
   const productCards = document.querySelectorAll(".product-card");

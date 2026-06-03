@@ -1,4 +1,5 @@
 document.addEventListener("alpine:init", () => {
+  // Data Produk
   Alpine.data("Products", () => ({
     items: [
       {
@@ -93,6 +94,7 @@ document.addEventListener("alpine:init", () => {
       },
     ],
 
+    // Sinkronisasi Data Produk dari Firebase
     init() {
       const self = this;
       function syncFromFirebase() {
@@ -124,6 +126,7 @@ document.addEventListener("alpine:init", () => {
     },
   }));
 
+  // Keranjang Belanja
   Alpine.store("cart", {
     items: JSON.parse(localStorage.getItem("cart")) || [],
     total: 0,

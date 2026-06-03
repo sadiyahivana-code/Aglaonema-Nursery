@@ -4,23 +4,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Judul website-->
     <title>Aglaonema Nursery</title>
 
+    <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!--Font poppins-->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
       rel="stylesheet"
     />
 
+    <!--CSS-->
     <link rel="stylesheet" href="css/style.css" />
 
+    <!--Apline JS-->
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
   </head>
 
+  <!-- Navbar -->
   <body>
     <nav class="navbar">
       <a href="#" class="navbar-logo">Aglaonema<span>Nursery</span></a>
@@ -46,15 +54,19 @@
         <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
       </div>
 
+      <!-- Search form -->
       <div class="search-form">
         <input type="search" id="search-box" placeholder="search here..." />
         <label for="search-box"><i data-feather="search"></i></label>
       </div>
+
+      <!--Shopping cart-->
       <div
         class="shopping-cart"
         x-data
         x-init="$watch('$store.cart.items', () => $nextTick(() => feather.replace()))"
       >
+        <!--Cart item-->
         <template x-for="(item, index) in $store.cart.items" :key="item.id">
           <div class="cart-item">
             <img :src="item.img" :alt="item.name" />
@@ -101,6 +113,8 @@
             </svg>
           </div>
         </template>
+
+        <!--Keranjang kosong-->
         <div
           x-show="$store.cart.items.length === 0"
           style="
@@ -112,6 +126,8 @@
         >
           <p>Cart is Empty</p>
         </div>
+
+        <!--Total price-->
         <div
           x-show="$store.cart.items.length > 0"
           style="padding: 0; margin-top: 0.2rem; text-align: center"
@@ -122,6 +138,8 @@
               x-text="'Rp ' + $store.cart.total.toLocaleString('id-ID')"
             ></span>
           </h3>
+
+          <!--Checkout form-->
         </div>
         <div class="form-container" x-show="$store.cart.items.length">
           <form action="" id="checkoutForm">
@@ -153,12 +171,16 @@
         </div>
       </div>
     </nav>
+
+    <!--Hero-->
     <section class="hero" id="home">
       <main class="content">
         <h1>Percantik rumahmu dengan<span> Aglaonema</span></h1>
         <p>Keindahan daun aglaonema untuk suasana rumah yang lebih segar</p>
       </main>
     </section>
+
+    <!-- About -->
     <section id="about" class="about">
       <h2><span>Tentang</span> Kami</h2>
 
@@ -183,6 +205,7 @@
       </div>
     </section>
 
+    <!--Menu-->
     <section id="menu" class="menu" x-data="Products">
       <h2><span>koleksi</span> Kami</h2>
       <p></p>
@@ -205,7 +228,7 @@
       </div>
     </section>
 
-    <!-- Products -->
+    <!--products-->
     <section class="products" id="products" x-data="Products">
       <h2><span>Produk</span> Unggulan</h2>
       <p>
@@ -213,6 +236,7 @@
         menawan
       </p>
 
+      <!--Products list-->
       <div class="row">
         <template x-for="(item, index) in items" :key="item.id">
           <div class="product-card">
@@ -283,6 +307,7 @@
         kami, kami siap membantu dengan senang hati.
       </p>
 
+      <!--Google maps-->
       <div class="row">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15858.950028199733!2d106.71023864406148!3d-6.427759897011616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69e7a659b6e78f%3A0xdc110efd688f6825!2sSofyan%20olive%20Nursery!5e0!3m2!1sid!2sid!4v1780058793799!5m2!1sid!2sid"
@@ -293,6 +318,7 @@
         >
         </iframe>
 
+        <!--Contact from-->
         <form action="">
           <div class="input-group">
             <i data-feather="user"></i>
@@ -310,6 +336,8 @@
         </form>
       </div>
     </section>
+
+    <!--Footer-->
     <footer>
       <div class="socials">
         <a href="#"><i data-feather="instagram"></i></a>
@@ -329,6 +357,7 @@
       </div>
     </footer>
 
+    <!--Product detail modal-->
     <div class="modal" id="item-detail-modal">
       <div class="modal-container">
         <a href="#" class="close-icon"><i data-feather="x"></i></a>
@@ -358,19 +387,22 @@
       </div>
     </div>
 
+    <!--Feather icons-->
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
       feather.replace();
     </script>
 
-    <!-- Firebase CDN  -->
+    <!--Apk Firebase-->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
+    <!--Custom Scripts-->
     <script src="js/firebase-sync.js"></script>
     <script src="src/app.js"></script>
     <script src="js/script.js"></script>
 
+    <!--Toast Notification-->
     <div
       id="cart-toast"
       style="

@@ -611,7 +611,7 @@
         padding: 2.5rem;
       }
 
-      /* TOAST */
+      /* NOTIFIKASI TOAST */
       .toast {
         position: fixed;
         bottom: 2.5rem;
@@ -654,7 +654,7 @@
         flex-shrink: 0;
       }
 
-      /* MISC */
+      /* KOMPONEN TAMBAHAN */
       .cred-box {
         max-width: 55rem;
       }
@@ -893,7 +893,7 @@
           <span class="page-title" id="page-title">Dashboard</span>
         </div>
         <div class="topbar-right">
-          <span class="sync-badge" id="sync-badge">🔴 Menghubungkan...</span>
+          <span class="sync-badge" id="sync-badge"> Menghubungkan...</span>
           <span class="admin-badge" id="admin-name-badge">Admin</span>
         </div>
       </div>
@@ -1180,7 +1180,7 @@
       <span id="toast-msg">Tersimpan</span>
     </div>
 
-    <!-- FIREBASE SDK -->
+    <!-- Koneksi ke Firebase -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
       import {
@@ -1192,7 +1192,7 @@
         remove,
       } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-      // ===== FIREBASE CONFIG =====
+      // ===== Penghubung Website ke Firebase =====
       const firebaseConfig = {
         apiKey: "AIzaSyBYimpJRRBUhyqy4qdilLPIDXaCOyO-RU4",
         authDomain: "aglaonema-nursery.firebaseapp.com",
@@ -1207,7 +1207,7 @@
       const firebaseApp = initializeApp(firebaseConfig);
       const db = getDatabase(firebaseApp);
 
-      // ===== DEFAULT DATA =====
+      // ===== Data Awal Aplikasi =====
       const DEFAULT_CREDS = { username: "admin", password: "admin123" };
       const DEFAULT_PRODUCTS = [
         {
@@ -1272,7 +1272,7 @@
         },
       ];
 
-      // ===== STATE =====
+      // ===== Data Aplikasi =====
       let products = [];
       let orders = [];
       let creds = DEFAULT_CREDS;
@@ -1296,11 +1296,11 @@
       }
       function setSyncBadge(ok) {
         const b = document.getElementById("sync-badge");
-        b.textContent = ok ? "🟢 Terhubung ke Firebase" : "🔴 Offline";
+        b.textContent = ok ? "Terhubung ke Firebase" : "Offline";
         b.className = "sync-badge" + (ok ? "" : " offline");
       }
 
-      // ===== FIREBASE LISTENERS =====
+      // ===== Pemantauan Data Firebase =====
       onValue(
         ref(db, "products"),
         (snap) => {
@@ -1534,7 +1534,7 @@
           .join("");
       }
 
-      // ===== CREDENTIALS =====
+      // ===== Pengaturan Login Admin =====
       function loadCredForm() {
         document.getElementById("cred-user").value = creds.username;
         document.getElementById("cred-old-pass").value = "";
@@ -1567,7 +1567,7 @@
         toast("Kredensial berhasil diperbarui!");
       };
 
-      // ===== TOAST =====
+      // ===== Tampilan Notifikasi =====
       let toastTimer;
       window.toast = function (msg, type = "success") {
         const el = document.getElementById("toast");

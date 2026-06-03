@@ -15,9 +15,7 @@
 
   window.firebaseDB = db;
 
-  // =============================================
-  // CHECKOUT
-  // =============================================
+  // Fungsi Checkout
   window.submitCheckout = function () {
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
@@ -34,7 +32,7 @@
       return;
     }
 
-    // Validasi stok sebelum checkout
+    // Validasi stok products
     const stockChecks = cart.items.map(function (item) {
       return db
         .ref("products/" + item.id)
