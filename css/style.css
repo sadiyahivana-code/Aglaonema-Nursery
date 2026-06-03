@@ -566,7 +566,7 @@ body {
   font-weight: bold;
 }
 
-.products .product-price span {
+.products .product-price .old-price {
   text-decoration: line-through;
   font-weight: lighter;
   font-size: 1rem;
@@ -782,7 +782,7 @@ footer .credit a {
   font-weight: bold;
 }
 
-.modal-content .product-price span {
+.modal-content .product-price .old-price {
   text-decoration: line-through;
   font-weight: lighter;
   font-size: 0.9rem;

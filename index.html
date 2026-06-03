@@ -142,7 +142,11 @@
               <input type="number" name="phone" id="phone" autocomplete="off" />
             </label>
 
-            <button class="checkout-button" type="submit" value="Checkout">
+            <button
+              class="checkout-button"
+              type="button"
+              onclick="submitCheckout()"
+            >
               Checkout
             </button>
           </form>
@@ -178,7 +182,8 @@
         </div>
       </div>
     </section>
-    <section id="menu" class="menu">
+
+    <section id="menu" class="menu" x-data="Products">
       <h2><span>koleksi</span> Kami</h2>
       <p></p>
       <p>
@@ -187,98 +192,20 @@
       </p>
 
       <div class="row">
-        <div class="menu-card">
-          <img
-            src="img/Aglaonema-adelina.jpg"
-            alt="Aglaonema adelina"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Aglaonema adelina -</h3>
-          <p class="menu-card-price">Rp 80.000</p>
-        </div>
-        <div class="menu-card">
-          <img
-            src="img/Aglaonema-bidadari.jpg"
-            alt="Aglaonema bidadari"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Aglaonema bidadari -</h3>
-          <p class="menu-card-price">Rp 100.000</p>
-        </div>
-        <div class="menu-card">
-          <img
-            src="img/Aglaonema-hot-lady.jpg"
-            alt="Aglaonema hot lady"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Aglaonema hot lady -</h3>
-          <p class="menu-card-price">Rp 105.000</p>
-        </div>
-        <div class="menu-card">
-          <img
-            src="img/Aglaonema-khanza.jpg"
-            alt="Aglaonema khanza"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Aglaonema khanza -</h3>
-          <p class="menu-card-price">Rp 120.000</p>
-        </div>
-        <div class="menu-card">
-          <img
-            src="img/Aglaonema-kochin-red.jpg"
-            alt="Aglaonema kochin"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Aglaonema kochin -</h3>
-          <p class="menu-card-price">Rp 110.000</p>
-        </div>
-        <div class="menu-card">
-          <img
-            src="img/Aglaonema-lipstick.jpg"
-            alt="Aglaonema lipstick"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Aglaonema lipstick -</h3>
-          <p class="menu-card-price">Rp 60.000</p>
-        </div>
-        <div class="menu-card">
-          <img
-            src="img/Aglaonema-lotus.jpg"
-            alt="Aglaonema lotus"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Aglaonema lotus -</h3>
-          <p class="menu-card-price">Rp 150.000</p>
-        </div>
-        <div class="menu-card">
-          <img
-            src="img/Aglaonema-merah.jpg"
-            alt="Aglaonema merah"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Aglaonema merah -</h3>
-          <p class="menu-card-price">Rp 90.000</p>
-        </div>
-        <div class="menu-card">
-          <img
-            src="img/Aglaonema-moonlight.jpg"
-            alt="Aglaonema moonlight"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Aglaonema moonlight -</h3>
-          <p class="menu-card-price">Rp 95.000</p>
-        </div>
-        <div class="menu-card">
-          <img
-            src="img/Aglaonema-silver-bay.jpg"
-            alt="Aglaonema silver bay"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Aglaonema silver bay -</h3>
-          <p class="menu-card-price">Rp 85.000</p>
-        </div>
+        <template x-for="item in items" :key="item.id">
+          <div class="menu-card">
+            <img :src="item.img" :alt="item.name" class="menu-card-img" />
+            <h3 class="menu-card-title" x-text=" item.name "></h3>
+            <p
+              class="menu-card-price"
+              x-text="'Rp ' + item.price.toLocaleString('id-ID')"
+            ></p>
+          </div>
+        </template>
       </div>
     </section>
+
+    <!-- Products -->
     <section class="products" id="products" x-data="Products">
       <h2><span>Produk</span> Unggulan</h2>
       <p>
@@ -287,227 +214,68 @@
       </p>
 
       <div class="row">
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" @click.prevent="$store.cart.add(items[0])">
-              <i data-feather="shopping-cart"></i>
-            </a>
-            <a href="#" class="item-detail-button" data-index="0">
-              <i data-feather="eye"></i>
-            </a>
-          </div>
-
-          <div class="product-image">
-            <img src="img/Aglaonema-adelina.jpg" alt="Aglaonema Adelina" />
-          </div>
-
-          <div class="product-content">
-            <h3>Aglaonema Adelina</h3>
-            <div class="product-price">Rp 80.000</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" @click.prevent="$store.cart.add(items[1])">
-              <i data-feather="shopping-cart"></i>
-            </a>
-            <a href="#" class="item-detail-button" data-index="1">
-              <i data-feather="eye"></i>
-            </a>
-          </div>
-          <div class="product-image">
-            <img src="img/Aglaonema-bidadari.jpg" alt="Aglaonema Bidadari" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Bidadari</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
+        <template x-for="(item, index) in items" :key="item.id">
+          <div class="product-card">
+            <div class="product-icons">
+              <a href="#" @click.prevent="$store.cart.add(item)">
+                <i data-feather="shopping-cart"></i>
+              </a>
+              <a href="#" class="item-detail-button" :data-index="index">
+                <i data-feather="eye"></i>
+              </a>
             </div>
-            <div class="product-price">Rp 100.000 <span>Rp 115.000</span></div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" @click.prevent="$store.cart.add(items[2])">
-              <i data-feather="shopping-cart"></i>
-            </a>
-            <a href="#" class="item-detail-button" data-index="2">
-              <i data-feather="eye"></i>
-            </a>
-          </div>
-          <div class="product-image">
-            <img src="img/Aglaonema-hot-lady.jpg" alt="Aglaonema Hot Lady" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Hot Lady</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
+            <div class="product-image">
+              <img :src="item.img" :alt="item.name" />
             </div>
-            <div class="product-price">Rp 105.000 <span>Rp 120.000</span></div>
-          </div>
-        </div>
+            <div class="product-content">
+              <h3 x-text="item.name"></h3>
+              <div
+                class="product-stars"
+                x-show="item.stars > 0"
+                x-html="
+                Array.from({length: 5}, (_, i) => 
+                  '<span style=\'color:var(--primary);font-size:1.7rem;letter-spacing:2px\'>' + (i < item.stars ? '★' : '☆') + '</span>'
+                    ).join('')
+                      "
+              ></div>
+              <div class="product-price">
+                <span
+                  x-text="'Rp ' + item.price.toLocaleString('id-ID')"
+                ></span>
+                <span
+                  class="old-price"
+                  x-show="item.oldPrice > 0"
+                  x-text="'Rp ' + (item.oldPrice||0).toLocaleString('id-ID')"
+                ></span>
+              </div>
 
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" @click.prevent="$store.cart.add(items[3])">
-              <i data-feather="shopping-cart"></i>
-            </a>
-            <a href="#" class="item-detail-button" data-index="3">
-              <i data-feather="eye"></i>
-            </a>
-          </div>
-          <div class="product-image">
-            <img src="img/Aglaonema-khanza.jpg" alt="Aglaonema Khanza" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Khanza</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star-full"></i>
+              <div
+                x-show="item.stock !== undefined && item.stock > 0"
+                style="color: #4caf7a; font-size: 1.1rem; margin-top: 0.4rem"
+                x-text="'Stok: ' + item.stock"
+              ></div>
+
+              <div
+                x-show="item.stock !== undefined && item.stock <= 0"
+                style="
+                  background: #e25555;
+                  color: #fff;
+                  font-size: 1.1rem;
+                  padding: 0.3rem 0.8rem;
+                  border-radius: 4px;
+                  margin-top: 0.5rem;
+                  display: inline-block;
+                "
+              >
+                Stok Habis
+              </div>
             </div>
-            <div class="product-price">Rp 120.000 <span>Rp 135.000</span></div>
           </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" @click.prevent="$store.cart.add(items[4])">
-              <i data-feather="shopping-cart"></i>
-            </a>
-            <a href="#" class="item-detail-button" data-index="4">
-              <i data-feather="eye"></i>
-            </a>
-          </div>
-          <div class="product-image">
-            <img src="img/Aglaonema-kochin-red.jpg" alt="Aglaonema Kochin" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Kochin</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">Rp 110.000 <span>Rp 125.000</span></div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" @click.prevent="$store.cart.add(items[5])">
-              <i data-feather="shopping-cart"></i>
-            </a>
-            <a href="#" class="item-detail-button" data-index="5">
-              <i data-feather="eye"></i>
-            </a>
-          </div>
-          <div class="product-image">
-            <img src="img/Aglaonema-lipstick.jpg" alt="Aglaonema Lipstick" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Lipstick</h3>
-            <div class="product-price">Rp 60.000</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" @click.prevent="$store.cart.add(items[6])">
-              <i data-feather="shopping-cart"></i>
-            </a>
-            <a href="#" class="item-detail-button" data-index="6">
-              <i data-feather="eye"></i>
-            </a>
-          </div>
-          <div class="product-image">
-            <img src="img/Aglaonema-lotus.jpg" alt="Aglaonema Lotus" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Lotus</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star-full"></i>
-            </div>
-            <div class="product-price">Rp 150.000 <span>Rp 170.000</span></div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" @click.prevent="$store.cart.add(items[7])">
-              <i data-feather="shopping-cart"></i>
-            </a>
-            <a href="#" class="item-detail-button" data-index="7">
-              <i data-feather="eye"></i>
-            </a>
-          </div>
-          <div class="product-image">
-            <img src="img/Aglaonema-merah.jpg" alt="Aglaonema Merah" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Merah</h3>
-            <div class="product-price">Rp 90.000</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" @click.prevent="$store.cart.add(items[8])">
-              <i data-feather="shopping-cart"></i>
-            </a>
-            <a href="#" class="item-detail-button" data-index="8">
-              <i data-feather="eye"></i>
-            </a>
-          </div>
-          <div class="product-image">
-            <img src="img/Aglaonema-moonlight.jpg" alt="Aglaonema Moonlight" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Moonlight</h3>
-            <div class="product-price">Rp 95.000</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#" @click.prevent="$store.cart.add(items[9])">
-              <i data-feather="shopping-cart"></i>
-            </a>
-            <a href="#" class="item-detail-button" data-index="9">
-              <i data-feather="eye"></i>
-            </a>
-          </div>
-          <div class="product-image">
-            <img
-              src="img/Aglaonema-silver-bay.jpg"
-              alt="Aglaonema Silver Bay"
-            />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Silver Bay</h3>
-            <div class="product-price">Rp 85.000</div>
-          </div>
-        </div>
+        </template>
       </div>
     </section>
+
+    <!-- Contact -->
     <section id="contact" class="contact">
       <h2><span>Kontak</span> Kami</h2>
       <p>
@@ -564,197 +332,65 @@
     <div class="modal" id="item-detail-modal">
       <div class="modal-container">
         <a href="#" class="close-icon"><i data-feather="x"></i></a>
-
-        <div class="modal-content" data-index="0">
+        <div class="modal-content" style="display: flex">
           <div class="modal-img">
-            <img src="img/Aglaonema-adelina.jpg" alt="Aglaonema" />
+            <img src="" alt="" id="modal-img" />
           </div>
           <div class="product-content">
-            <h3>Aglaonema Adelina</h3>
-            <p>
-              Aglaonema Adelina memiliki tampilan elegan dengan warna daun yang
-              cantik, cocok untuk dekorasi ruangan.
-            </p>
-            <div class="product-price">IDR 80K <span>IDR 100K</span></div>
-            <a href="#"
-              ><i data-feather="shopping-cart"></i> <span>add to cart</span></a
-            >
-          </div>
-        </div>
-
-        <div class="modal-content" data-index="1">
-          <div class="modal-img">
-            <img src="img/Aglaonema-bidadari.jpg" alt="Aglaonema Bidadari" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Bidadari</h3>
-            <p>
-              Warna lembut dan menawan, cocok untuk mempercantik ruangan rumah.
-            </p>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
+            <h3 id="modal-name"></h3>
+            <p
+              id="modal-desc"
+              style="
+                font-size: 1rem;
+                line-height: 1.6rem;
+                margin-bottom: 0.5rem;
+              "
+            ></p>
+            <div class="product-price">
+              <span id="modal-price"></span>
+              <span class="old-price" id="modal-old-price"></span>
             </div>
-            <div class="product-price">IDR 100K <span>IDR 115K</span></div>
-            <a href="#"
-              ><i data-feather="shopping-cart"></i> <span>add to cart</span></a
-            >
-          </div>
-        </div>
-
-        <div class="modal-content" data-index="2">
-          <div class="modal-img">
-            <img src="img/Aglaonema-hot-lady.jpg" alt="Aglaonema Hot Lady" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Hot Lady</h3>
-            <p>Daun merah menyala yang sangat menarik perhatian.</p>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">IDR 105K <span>IDR 120K</span></div>
-            <a href="#"
-              ><i data-feather="shopping-cart"></i> <span>add to cart</span></a
-            >
-          </div>
-        </div>
-
-        <div class="modal-content" data-index="3">
-          <div class="modal-img">
-            <img src="img/Aglaonema-khanza.jpg" alt="Aglaonema Khanza" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Khanza</h3>
-            <p>Tanaman premium dengan tampilan eksotis dan elegan.</p>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star-full"></i>
-            </div>
-            <div class="product-price">IDR 120K <span>IDR 135K</span></div>
-            <a href="#"
-              ><i data-feather="shopping-cart"></i> <span>add to cart</span></a
-            >
-          </div>
-        </div>
-
-        <div class="modal-content" data-index="4">
-          <div class="modal-img">
-            <img src="img/Aglaonema-kochin-red.jpg" alt="Aglaonema Kochin" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Kochin</h3>
-            <p>Kombinasi merah dan hijau yang elegan dan segar.</p>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">IDR 110K <span>IDR 125K</span></div>
-            <a href="#"
-              ><i data-feather="shopping-cart"></i> <span>add to cart</span></a
-            >
-          </div>
-        </div>
-
-        <div class="modal-content" data-index="5">
-          <div class="modal-img">
-            <img src="img/Aglaonema-lipstick.jpg" alt="Aglaonema Lipstick" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Lipstick</h3>
-            <p>Daun unik seperti sapuan warna lipstick merah.</p>
-            <div class="product-price">IDR 60K</div>
-            <a href="#"
-              ><i data-feather="shopping-cart"></i> <span>add to cart</span></a
-            >
-          </div>
-        </div>
-
-        <div class="modal-content" data-index="6">
-          <div class="modal-img">
-            <img src="img/Aglaonema-lotus.jpg" alt="Aglaonema Lotus" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Lotus</h3>
-            <p>Tampilan mewah dengan daun yang kuat dan indah.</p>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star-full"></i>
-            </div>
-            <div class="product-price">IDR 150K <span>IDR 170K</span></div>
-            <a href="#"
-              ><i data-feather="shopping-cart"></i> <span>add to cart</span></a
-            >
-          </div>
-        </div>
-
-        <div class="modal-content" data-index="7">
-          <div class="modal-img">
-            <img src="img/Aglaonema-merah.jpg" alt="Aglaonema Merah" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Merah</h3>
-            <p>Dominasi warna merah yang kuat dan menarik perhatian.</p>
-            <div class="product-price">IDR 90K</div>
-            <a href="#"
-              ><i data-feather="shopping-cart"></i> <span>add to cart</span></a
-            >
-          </div>
-        </div>
-
-        <div class="modal-content" data-index="8">
-          <div class="modal-img">
-            <img src="img/Aglaonema-moonlight.jpg" alt="Aglaonema Moonlight" />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Moonlight</h3>
-            <p>Warna lembut seperti cahaya bulan yang menenangkan.</p>
-            <div class="product-price">IDR 95K</div>
-            <a href="#"
-              ><i data-feather="shopping-cart"></i> <span>add to cart</span></a
-            >
-          </div>
-        </div>
-
-        <div class="modal-content" data-index="9">
-          <div class="modal-img">
-            <img
-              src="img/Aglaonema-silver-bay.jpg"
-              alt="Aglaonema Silver Bay"
-            />
-          </div>
-          <div class="product-content">
-            <h3>Aglaonema Silver Bay</h3>
-            <p>Daun hijau keperakan yang elegan dan modern.</p>
-            <div class="product-price">IDR 85K</div>
-            <a href="#"
-              ><i data-feather="shopping-cart"></i> <span>add to cart</span></a
-            >
+            <a href="#" id="modal-add-cart">
+              <i data-feather="shopping-cart"></i> <span>add to cart</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
+
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
       feather.replace();
     </script>
 
+    <!-- Firebase CDN  -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+    <script src="js/firebase-sync.js"></script>
     <script src="src/app.js"></script>
     <script src="js/script.js"></script>
+
+    <div
+      id="cart-toast"
+      style="
+        position: fixed;
+        bottom: 2.5rem;
+        right: 2.5rem;
+        background: #222;
+        color: #fff;
+        padding: 1.2rem 2rem;
+        border-radius: 10px;
+        font-size: 1.3rem;
+        border-left: 4px solid var(--primary);
+        z-index: 99999;
+        opacity: 0;
+        transform: translateY(2rem);
+        transition: all 0.3s;
+        pointer-events: none;
+      "
+    >
+      Produk berhasil ditambahkan!
+    </div>
   </body>
 </html>

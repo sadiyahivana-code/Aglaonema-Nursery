@@ -1,19 +1,17 @@
 console.log("JS kebaca");
 
-// Toggle class active untuk hamburger menu
+// Toggle hamburger menu
 const navbarNav = document.querySelector(".navbar-nav");
 const hamburger = document.querySelector("#hamburger-menu");
-
 hamburger.addEventListener("click", function (e) {
   e.preventDefault();
   navbarNav.classList.toggle("active");
 });
 
-// Toggle class active untuk search form
+// Toggle search form
 const searchForm = document.querySelector(".search-form");
 const searchBtn = document.querySelector("#search-button");
 const searchBox = document.querySelector("#search-box");
-
 searchBtn.addEventListener("click", function (e) {
   e.preventDefault();
   e.stopPropagation();
@@ -21,15 +19,13 @@ searchBtn.addEventListener("click", function (e) {
   searchBox.focus();
   shoppingCart.classList.remove("active");
 });
-
 searchForm.addEventListener("click", function (e) {
   e.stopPropagation();
 });
 
-// Toggle class active untuk shopping cart
+// Toggle shopping cart
 const shoppingCart = document.querySelector(".shopping-cart");
 const cartBtn = document.querySelector("#shopping-cart-button");
-
 cartBtn.addEventListener("click", function (e) {
   e.preventDefault();
   e.stopPropagation();
@@ -52,20 +48,50 @@ document.addEventListener("click", function (e) {
 
 // Modal Box
 const itemDetailModal = document.querySelector("#item-detail-modal");
-const itemDetailButtons = document.querySelectorAll(".item-detail-button");
-const modalContents = document.querySelectorAll(".modal-content");
+let currentModalProduct = null;
 
-itemDetailButtons.forEach((btn) => {
-  btn.onclick = (e) => {
-    e.preventDefault();
-    const index = btn.dataset.index;
-    modalContents.forEach((content) => (content.style.display = "none"));
-    document.querySelector(
-      `.modal-content[data-index="${index}"]`,
-    ).style.display = "flex";
-    itemDetailModal.classList.add("active");
-  };
+document.querySelector(".products").addEventListener("click", function (e) {
+  const btn = e.target.closest(".item-detail-button");
+  if (!btn) return;
+  e.preventDefault();
+  e.stopPropagation();
+
+  const index = parseInt(btn.dataset.index);
+  const allProducts = document.querySelector("[x-data='Products']")
+    ?._x_dataStack?.[0]?.items;
+  if (!allProducts || !allProducts[index]) return;
+
+  const p = allProducts[index];
+  currentModalProduct = p;
+
+  document.getElementById("modal-img").src = p.img;
+  document.getElementById("modal-img").alt = p.name;
+  document.getElementById("modal-name").textContent = p.name;
+  document.getElementById("modal-desc").textContent = p.desc || "";
+  document.getElementById("modal-price").textContent =
+    "Rp " + p.price.toLocaleString("id-ID");
+
+  const oldPriceEl = document.getElementById("modal-old-price");
+  if (p.oldPrice > 0) {
+    oldPriceEl.textContent = "Rp " + p.oldPrice.toLocaleString("id-ID");
+    oldPriceEl.style.display = "inline";
+  } else {
+    oldPriceEl.style.display = "none";
+  }
+
+  feather.replace();
+  itemDetailModal.classList.add("active");
 });
+
+document
+  .getElementById("modal-add-cart")
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!currentModalProduct) return;
+    Alpine.store("cart").add(currentModalProduct);
+    itemDetailModal.classList.remove("active");
+  });
 
 document.querySelector(".modal .close-icon").onclick = (e) => {
   e.preventDefault();
@@ -73,9 +99,7 @@ document.querySelector(".modal .close-icon").onclick = (e) => {
 };
 
 window.onclick = (e) => {
-  if (e.target === itemDetailModal) {
-    itemDetailModal.classList.remove("active");
-  }
+  if (e.target === itemDetailModal) itemDetailModal.classList.remove("active");
 };
 
 // Search functionality
@@ -83,17 +107,14 @@ searchBox.addEventListener("input", function () {
   const keyword = this.value.toLowerCase();
   const productCards = document.querySelectorAll(".product-card");
   const menuCards = document.querySelectorAll(".menu-card");
-
   productCards.forEach((card) => {
     const name = card.querySelector("h3").textContent.toLowerCase();
     card.style.display = name.includes(keyword) ? "block" : "none";
   });
-
   menuCards.forEach((card) => {
     const name = card.querySelector("h3").textContent.toLowerCase();
     card.style.display = name.includes(keyword) ? "block" : "none";
   });
-
   if (keyword.length > 0) {
     document.querySelector("#products").scrollIntoView({ behavior: "smooth" });
   }
@@ -106,9 +127,7 @@ searchBox.addEventListener("keydown", function (e) {
   }
 });
 
-// =============================================
-// CHECKOUT — simpan pesanan ke localStorage
-// =============================================
+// Checkout
 function submitCheckout() {
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
@@ -120,13 +139,11 @@ function submitCheckout() {
   }
 
   const cart = Alpine.store("cart");
-
   if (cart.items.length === 0) {
     alert("Keranjang kamu kosong!");
     return;
   }
 
-  // Buat objek pesanan
   const order = {
     id: Date.now(),
     date: new Date().toLocaleString("id-ID"),
@@ -142,46 +159,29 @@ function submitCheckout() {
     total: cart.total,
   };
 
-  // Simpan ke localStorage
   const orders = JSON.parse(localStorage.getItem("orders") || "[]");
   orders.push(order);
   localStorage.setItem("orders", JSON.stringify(orders));
 
-  // Reset cart
   cart.items.splice(0, cart.items.length);
   cart.updateCart();
   cart.save();
 
-  // Reset form
   document.getElementById("name").value = "";
   document.getElementById("email").value = "";
   document.getElementById("phone").value = "";
 
-  // Tutup cart panel
   shoppingCart.classList.remove("active");
-
-  alert("Pesanan berhasil dikirim! Terima kasih " + name + " 🌿");
+  alert("Pesanan berhasil dikirim! Terima kasih " + name);
 }
 
-// Add to cart dari modal
-document.querySelectorAll(".modal-content").forEach((content) => {
-  const addBtn = content.querySelector("a[href='#']");
-  if (!addBtn) return;
-
-  addBtn.addEventListener("click", function (e) {
-    e.preventDefault(); // ← cegah scroll ke home
-    e.stopPropagation();
-
-    const index = parseInt(content.dataset.index);
-    const productsData = Alpine.store ? null : null;
-    const items = Alpine.$data?.[0]?.items; // fallback
-
-    // Ambil data dari Alpine Products
-    const allProducts = document.querySelector("[x-data='Products']")
-      ?._x_dataStack?.[0]?.items;
-    if (!allProducts) return;
-
-    Alpine.store("cart").add(allProducts[index]);
-    itemDetailModal.classList.remove("active"); // tutup modal setelah add
-  });
-});
+function showCartToast(name) {
+  const toast = document.getElementById("cart-toast");
+  toast.textContent = name + " ditambahkan ke keranjang!";
+  toast.style.opacity = "1";
+  toast.style.transform = "translateY(0)";
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateY(2rem)";
+  }, 2500);
+}
