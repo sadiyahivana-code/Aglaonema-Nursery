@@ -1,6 +1,6 @@
 :root {
-  --primary: #b6895b;
-  --bg: #010101;
+  --primary: #2a9d8f;
+  --bg: #2c2416;
 }
 
 * {
@@ -28,7 +28,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.4rem 7%;
-  background-color: rgba(1, 1, 1, 0.8);
+  background-color: rgba(245, 240, 232, 0.95);
   border-bottom: 1px solid #513c28;
   position: fixed;
   top: 0;
@@ -40,7 +40,7 @@ body {
 .navbar .navbar-logo {
   font-size: 2rem;
   font-weight: 700;
-  color: #fff;
+  color: #1a2e2b;
   font-style: italic;
 }
 
@@ -49,7 +49,7 @@ body {
 }
 
 .navbar .navbar-nav a {
-  color: #fff;
+  color: #1a2e2b;
   display: inline-block;
   font-size: 1.3rem;
   margin: 0 1rem;
@@ -78,7 +78,7 @@ body {
 }
 
 .navbar .navbar-extra a {
-  color: #fff;
+  color: #1a2e2b;
   margin: 0 0.5rem;
   display: inline-block;
   position: relative;
