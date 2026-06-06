@@ -172,7 +172,7 @@ const products = [
 ];
 
 async function main() {
-  console.log("🌱 Starting seed...");
+  console.log(" Starting seed...");
 
   // Admin
   const hashedPassword = await bcrypt.hash("Admin123!", 12);
@@ -187,7 +187,7 @@ async function main() {
       phone: "08123456789",
     },
   });
-  console.log("✅ Admin created: admin@aglaonema.id / Admin123!");
+  console.log(" Admin created: admin@aglaonema.id / Admin123!");
 
   // Store
   await prisma.storeLocation.deleteMany();
@@ -198,11 +198,11 @@ async function main() {
         "Jl. Desa No.51, RT.3/RW.3, Waru, Kec. Parung, Kabupaten Bogor, Jawa Barat 16330",
       lat: -6.4317,
       lng: 106.7283,
-      phone: "(0251) 8123-456",
+      phone: "(+62) 857 97159921",
       openHours: "Senin–Sabtu: 08.00–17.00 | Minggu: 09.00–15.00",
     },
   });
-  console.log("✅ Store location created");
+  console.log(" Store location created");
 
   // Products
   await prisma.orderItem.deleteMany();
@@ -220,9 +220,9 @@ async function main() {
       data: { ...product, slug },
     });
   }
-  console.log(`✅ ${products.length} products created`);
+  console.log(` ${products.length} products created`);
 
-  console.log("🌿 Seed completed successfully!");
+  console.log(" Seed completed successfully!");
 }
 
 main()

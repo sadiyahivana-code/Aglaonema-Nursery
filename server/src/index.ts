@@ -17,6 +17,7 @@ import adminOrderRoutes from "./routes/admin/orders";
 import adminUserRoutes from "./routes/admin/users";
 import adminReportRoutes from "./routes/admin/reports";
 import paymentRoutes from "./routes/payment";
+import trackingRoutes from "./routes/tracking";
 import { requireAdmin } from "./middleware/auth";
 
 const app = express();
@@ -41,6 +42,7 @@ app.use("/api/stores", storeRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/payment", paymentRoutes);
+app.use("/api", trackingRoutes);
 
 // Admin routes
 app.use("/api/admin/auth", adminAuthRoutes);
@@ -52,7 +54,7 @@ app.use("/api/admin/reports", requireAdmin, adminReportRoutes);
 app.get("/api/health", (_, res) => res.json({ status: "ok" }));
 
 app.listen(PORT, () => {
-  console.log(`🌿 Aglaonema Nursery Server running on port ${PORT}`);
+  console.log(` Aglaonema Nursery Server running on port ${PORT}`);
 });
 
 export default app;
