@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Judul website-->
+    <title>Aglaonema Nursery</title>
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!--Font poppins-->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--CSS-->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!--Apline JS-->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+
+  <!-- Navbar -->
+  <body>
+    <nav class="navbar">
+      <a href="#" class="navbar-logo">Aglaonema<span>Nursery</span></a>
+
+      <div class="navbar-nav">
+        <a href="#home">Home</a>
+        <a href="#about">Tentang Kami</a>
+        <a href="#menu">Menu</a>
+        <a href="#products">Produk</a>
+        <a href="#contact">Kontak</a>
+      </div>
+
+      <div class="navbar-extra" x-data>
+        <a href="#" id="search-button"><i data-feather="search"></i></a>
+        <a href="#" id="shopping-cart-button">
+          <i data-feather="shopping-cart"></i>
+          <span
+            class="quantity-badge"
+            x-text="$store.cart.quantity"
+            x-show="$store.cart.quantity > 0"
+          ></span>
+        </a>
+        <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+      </div>
+
+      <!-- Search form -->
+      <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here..." />
+        <label for="search-box"><i data-feather="search"></i></label>
+      </div>
+
+      <!--Shopping cart-->
+      <div
+        class="shopping-cart"
+        x-data
+        x-init="$watch('$store.cart.items', () => $nextTick(() => feather.replace()))"
+      >
+        <!--Cart item-->
+        <template x-for="(item, index) in $store.cart.items" :key="item.id">
+          <div class="cart-item">
+            <img :src="item.img" :alt="item.name" />
+            <div class="item-detail">
+              <h3 x-text="item.name"></h3>
+              <div class="item-price">
+                <button
+                  @click.stop="$store.cart.decrement(index)"
+                  class="qty-btn"
+                >
+                  -
+                </button>
+                <span x-text="item.qty"></span>
+                <button
+                  @click.stop="$store.cart.increment(index)"
+                  class="qty-btn"
+                >
+                  +
+                </button>
+                <span
+                  x-text="'Rp ' + (item.qty * item.price).toLocaleString('id-ID')"
+                ></span>
+              </div>
+            </div>
+            <svg
+              @click.stop="$store.cart.remove(index)"
+              class="remove-item"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="cursor: pointer"
+            >
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+              <path d="M10 11v6"></path>
+              <path d="M14 11v6"></path>
+              <path d="M9 6V4h6v2"></path>
+            </svg>
+          </div>
+        </template>
+
+        <!--Keranjang kosong-->
+        <div
+          x-show="$store.cart.items.length === 0"
+          style="
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+            font-size: 1.4rem;
+          "
+        >
+          <p>Cart is Empty</p>
+        </div>
+
+        <!--Total price-->
+        <div
+          x-show="$store.cart.items.length > 0"
+          style="padding: 0; margin-top: 0.2rem; text-align: center"
+        >
+          <h3 style="margin: 0; font-size: 1.4rem; color: #333">
+            Total:
+            <span
+              x-text="'Rp ' + $store.cart.total.toLocaleString('id-ID')"
+            ></span>
+          </h3>
+
+          <!--Checkout form-->
+        </div>
+        <div class="form-container" x-show="$store.cart.items.length">
+          <form action="" id="checkoutForm">
+            <h4>Customer Detail</h4>
+
+            <label for="name">
+              <span>Name</span>
+              <input type="text" name="name" id="name" />
+            </label>
+
+            <label for="email">
+              <span>Email</span>
+              <input type="email" name="email" id="email" />
+            </label>
+
+            <label for="phone">
+              <span>Phone</span>
+              <input type="number" name="phone" id="phone" autocomplete="off" />
+            </label>
+
+            <button
+              class="checkout-button"
+              type="button"
+              onclick="submitCheckout()"
+            >
+              Checkout
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!--Hero-->
+    <section class="hero" id="home">
+      <main class="content">
+        <h1>Percantik rumahmu dengan<span> Aglaonema</span></h1>
+        <p>Keindahan daun aglaonema untuk suasana rumah yang lebih segar</p>
+      </main>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+      <h2><span>Tentang</span> Kami</h2>
+
+      <div class="row">
+        <div class="about-img">
+          <img src="img/tentang-kami.jpg" alt="Tentang Kami" />
+        </div>
+        <div class="content">
+          <h3>Kenapa memilih Aglaonema kami?</h3>
+          <p>
+            Kami menyediakan Aglaonema dengan daun yang cantik dan warna yang
+            menawan untuk mempercantik rumahmu. Setiap tanaman dirawat dengan
+            baik agar tetap sehat dan tampil segar saat sampai di tanganmu
+          </p>
+          <p>
+            Aglaonema bukan hanya tanaman hias, tapi juga bisa menghadirkan
+            suasana rumah yang lebih hidup dan nyaman. Dengan tampilan yang
+            indah dan perawatan yang mudah, Aglaonema cocok untuk melengkapi
+            setiap sudut rumahmu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!--Menu-->
+    <section id="menu" class="menu" x-data="Products">
+      <h2><span>koleksi</span> Kami</h2>
+      <p></p>
+      <p>
+        Berbagai pilihan aglaonema cantik dengan warna dan karakter daun yang
+        unik.
+      </p>
+
+      <div class="row">
+        <template x-for="item in items" :key="item.id">
+          <div class="menu-card">
+            <img :src="item.img" :alt="item.name" class="menu-card-img" />
+            <h3 class="menu-card-title" x-text=" item.name "></h3>
+            <p
+              class="menu-card-price"
+              x-text="'Rp ' + item.price.toLocaleString('id-ID')"
+            ></p>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <!--products-->
+    <section class="products" id="products" x-data="Products">
+      <h2><span>Produk</span> Unggulan</h2>
+      <p>
+        Pilihan favorit pelanggan dengan kualitas terbaik dan tampilan yang
+        menawan
+      </p>
+
+      <!--Products list-->
+      <div class="row">
+        <template x-for="(item, index) in items" :key="item.id">
+          <div class="product-card">
+            <div class="product-icons">
+              <a href="#" @click.prevent="$store.cart.add(item)">
+                <i data-feather="shopping-cart"></i>
+              </a>
+              <a href="#" class="item-detail-button" :data-index="index">
+                <i data-feather="eye"></i>
+              </a>
+            </div>
+            <div class="product-image">
+              <img :src="item.img" :alt="item.name" />
+            </div>
+            <div class="product-content">
+              <h3 x-text="item.name"></h3>
+              <div
+                class="product-stars"
+                x-show="item.stars > 0"
+                x-html="
+                Array.from({length: 5}, (_, i) => 
+                  '<span style=\'color:var(--primary);font-size:1.7rem;letter-spacing:2px\'>' + (i < item.stars ? '★' : '☆') + '</span>'
+                    ).join('')
+                      "
+              ></div>
+              <div class="product-price">
+                <span
+                  x-text="'Rp ' + item.price.toLocaleString('id-ID')"
+                ></span>
+                <span
+                  class="old-price"
+                  x-show="item.oldPrice > 0"
+                  x-text="'Rp ' + (item.oldPrice||0).toLocaleString('id-ID')"
+                ></span>
+              </div>
+
+              <div
+                x-show="item.stock !== undefined && item.stock > 0"
+                style="color: #4caf7a; font-size: 1.1rem; margin-top: 0.4rem"
+                x-text="'Stok: ' + item.stock"
+              ></div>
+
+              <div
+                x-show="item.stock !== undefined && item.stock <= 0"
+                style="
+                  background: #e25555;
+                  color: #fff;
+                  font-size: 1.1rem;
+                  padding: 0.3rem 0.8rem;
+                  border-radius: 4px;
+                  margin-top: 0.5rem;
+                  display: inline-block;
+                "
+              >
+                Stok Habis
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <h2><span>Kontak</span> Kami</h2>
+      <p>
+        Butuh rekomendasi Aglaonema yang cocok untuk rumah atau hadiah? Hubungi
+        kami, kami siap membantu dengan senang hati.
+      </p>
+
+      <!--Google maps-->
+      <div class="row">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15858.950028199733!2d106.71023864406148!3d-6.427759897011616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69e7a659b6e78f%3A0xdc110efd688f6825!2sSofyan%20olive%20Nursery!5e0!3m2!1sid!2sid!4v1780058793799!5m2!1sid!2sid"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="map"
+        >
+        </iframe>
+
+        <!--Contact from-->
+        <form action="">
+          <div class="input-group">
+            <i data-feather="user"></i>
+            <input type="text" placeholder="nama" />
+          </div>
+          <div class="input-group">
+            <i data-feather="mail"></i>
+            <input type="text" placeholder="email" />
+          </div>
+          <div class="input-group">
+            <i data-feather="phone"></i>
+            <input type="text" placeholder="no hp" />
+          </div>
+          <button type="submit" class="btn">kirim pesan</button>
+        </form>
+      </div>
+    </section>
+
+    <!--Footer-->
+    <footer>
+      <div class="socials">
+        <a href="#"><i data-feather="instagram"></i></a>
+        <a href="#"><i data-feather="twitter"></i></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+      </div>
+
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#about">Tentang Kami</a>
+        <a href="#menu">Menu</a>
+        <a href="#contact">Kontak</a>
+      </div>
+
+      <div class="credit">
+        <p>Created by <a href="">Deni.Ivana </a>. | © 2026.</p>
+      </div>
+    </footer>
+
+    <!--Product detail modal-->
+    <div class="modal" id="item-detail-modal">
+      <div class="modal-container">
+        <a href="#" class="close-icon"><i data-feather="x"></i></a>
+        <div class="modal-content" style="display: flex">
+          <div class="modal-img">
+            <img src="" alt="" id="modal-img" />
+          </div>
+          <div class="product-content">
+            <h3 id="modal-name"></h3>
+            <p
+              id="modal-desc"
+              style="
+                font-size: 1rem;
+                line-height: 1.6rem;
+                margin-bottom: 0.5rem;
+              "
+            ></p>
+            <div class="product-price">
+              <span id="modal-price"></span>
+              <span class="old-price" id="modal-old-price"></span>
+            </div>
+            <a href="#" id="modal-add-cart">
+              <i data-feather="shopping-cart"></i> <span>add to cart</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Feather icons-->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+      feather.replace();
+    </script>
+
+    <!--Apk Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+    <!--Custom Scripts-->
+    <script src="js/firebase-sync.js"></script>
+    <script src="src/app.js"></script>
+    <script src="js/script.js"></script>
+
+    <!--Toast Notification-->
+    <div
+      id="cart-toast"
+      style="
+        position: fixed;
+        bottom: 2.5rem;
+        right: 2.5rem;
+        background: #222;
+        color: #fff;
+        padding: 1.2rem 2rem;
+        border-radius: 10px;
+        font-size: 1.3rem;
+        border-left: 4px solid var(--primary);
+        z-index: 99999;
+        opacity: 0;
+        transform: translateY(2rem);
+        transition: all 0.3s;
+        pointer-events: none;
+      "
+    >
+      Produk berhasil ditambahkan!
+    </div>
+  </body>
+</html>
